@@ -1,0 +1,7 @@
+{
+  "name": "Saint-Seeing",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
