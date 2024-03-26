@@ -7,24 +7,24 @@ import {
 } from "@ionic/react";
 import ExploreContainer from "../components/ExploreContainer";
 
-const Tab1 = () => {
+const Profile = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle>Tab 3</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
+            <IonTitle size="large">Tab 3</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Tab 1 page" />
+        <ExploreContainer name="Profile Page" />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab1;
+export default Profile;
