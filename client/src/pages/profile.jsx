@@ -1,11 +1,11 @@
 import {
+  IonButton,
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 
 const Profile = () => {
   return (
@@ -21,7 +21,10 @@ const Profile = () => {
             <IonTitle size="large">Tab 3</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Profile Page" />
+
+        <IonButton routerLink="/login" routerDirection="root">
+          Sign out
+        </IonButton>
       </IonContent>
     </IonPage>
   );

@@ -5,24 +5,18 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
+import { useDispatch } from "react-redux";
+import LoginScreen from "../components/login_screen";
+import { turnOffNavbar } from "../store/navbar_slice";
+import classes from "../css/login.module.css";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  dispatch(turnOffNavbar());
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Login Screen</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <p className="text-center text-red-600 text-2xl ">this is a test</p>
-        <ExploreContainer name="Login Screen" />
+        <LoginScreen className={classes.container} />
       </IonContent>
     </IonPage>
   );
