@@ -1,0 +1,3 @@
+Used to start the app:
+
+ionic capacitor run android -l --external

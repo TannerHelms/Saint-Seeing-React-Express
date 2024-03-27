@@ -6,8 +6,12 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import useLogout from "../hooks/use_logout";
+import useAuth from "../hooks/use_auth";
 
 const Profile = () => {
+  const { user } = useAuth();
+  const { logout } = useLogout();
   return (
     <IonPage>
       <IonHeader>
@@ -22,9 +26,7 @@ const Profile = () => {
           </IonToolbar>
         </IonHeader>
 
-        <IonButton routerLink="/login" routerDirection="root">
-          Sign out
-        </IonButton>
+        <IonButton onClick={logout}>Sign out</IonButton>
       </IonContent>
     </IonPage>
   );

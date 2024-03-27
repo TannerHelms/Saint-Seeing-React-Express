@@ -1,12 +1,14 @@
 import { createContext } from "react";
 import axios from "axios";
 import { store } from "../store/store";
-
+import { CapacitorHttp } from '@capacitor/core';
 
 export class Api {
+  baseUrl = "http://10.100.1.41:3000";
   async makeRequest(uri, method, body) {
     const token = store.getState().token.value;
     const options = {
+      url: `${this.baseUrl}${uri}`,
       method,
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -17,12 +19,17 @@ export class Api {
     if (body) {
       options.data = body;
     }
-
     try {
-      const res = await axios(uri, options);
-      return res.data;
+      const res = await CapacitorHttp.request(options);
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        throw new Error(res.error);
+      }
+      // const res = await axios(`${this.baseUrl}${uri}`, options);
     } catch (error) {
-      throw new Error(error.response.data.error);
+      console.log(error)
+      throw new Error(error.response);
     }
   }
 

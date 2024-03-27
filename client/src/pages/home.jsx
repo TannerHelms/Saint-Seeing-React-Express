@@ -6,16 +6,20 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { useDispatch } from "react-redux";
-import { turnOnNavbar } from "../store/navbar_slice";
+import useAuth from "../hooks/use_auth";
+import generateUsers from "../faker/home";
 
 const Home = () => {
+  const { user } = useAuth();
   const dispatch = useDispatch();
-  dispatch(turnOnNavbar());
+  const users = generateUsers(10);
+  console.log(users);
+  // dispatch(turnOnNavbar());
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
+          <IonTitle>Tab 3</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

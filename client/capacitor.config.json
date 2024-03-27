@@ -1,0 +1,10 @@
+{
+    "plugins": {
+      "CapacitorHttp": {
+        "enabled": true
+      }
+    },
+    "server": {
+        "url": "http://localhost:8102"
+    }
+  }

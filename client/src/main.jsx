@@ -10,6 +10,7 @@ import appTheme from "./theme.js";
 import "@mantine/core/styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PersistGate } from "redux-persist/integration/react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -34,6 +35,7 @@ root.render(
           <MantineProvider theme={appTheme} withGlobalStyles withNormalizeCss>
             <App />
           </MantineProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </PersistGate>
     </Provider>

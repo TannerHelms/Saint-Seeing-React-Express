@@ -5,8 +5,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import useAuth from "../hooks/use_auth";
 
 const Messages = () => {
+  const { user } = useAuth();
   return (
     <IonPage>
       <IonHeader>

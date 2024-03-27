@@ -12,15 +12,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@capacitor/android": "5.7.4",
     "@capacitor/app": "5.0.7",
     "@capacitor/camera": "^5.0.9",
     "@capacitor/core": "5.7.4",
     "@capacitor/filesystem": "^5.2.1",
     "@capacitor/haptics": "5.0.7",
+    "@capacitor/ios": "5.7.4",
     "@capacitor/keyboard": "5.0.8",
     "@capacitor/preferences": "^5.0.7",
     "@capacitor/status-bar": "5.0.7",
     "@emotion/react": "^11.11.4",
+    "@faker-js/faker": "^8.4.1",
     "@ionic/pwa-elements": "^3.2.2",
     "@ionic/react": "^7.0.0",
     "@ionic/react-router": "^7.0.0",
@@ -31,6 +34,7 @@
     "@mantine/notifications": "^7.7.0",
     "@reduxjs/toolkit": "^2.2.2",
     "@tanstack/react-query": "^5.28.8",
+    "@tanstack/react-query-devtools": "^5.28.8",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "autoprefixer": "^10.4.19",
@@ -43,7 +47,8 @@
     "react-router": "^5.3.4",
     "react-router-dom": "^5.3.4",
     "redux-deep-persist": "^1.0.7",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@capacitor/cli": "5.7.4",
