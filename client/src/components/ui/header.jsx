@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import {
   IonBackButton,
+  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -9,17 +10,22 @@ import {
   IonToolbar,
 } from "@ionic/react";
 
-const Header = ({ title, back = false, children }) => {
+const Header = ({ title, back = false, children, icon, onClick }) => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar class="w-full relative p-0 m-0">
+        <IonToolbar className="w-full relative p-0 m-0">
+          {icon && (
+            <IonButtons className="float-start" onClick={onClick}>
+              <IonButton>{icon}</IonButton>
+            </IonButtons>
+          )}
           {back && (
-            <IonButtons class="float-start">
+            <IonButtons className="float-start">
               <IonBackButton defaultHref="/home"></IonBackButton>
             </IonButtons>
           )}
-          <IonTitle class="w-fit absolute left-1/2 -translate-x-1/2 inset-y-0">
+          <IonTitle className="w-fit absolute left-1/2 -translate-x-1/2 inset-y-0">
             {title}
           </IonTitle>
         </IonToolbar>

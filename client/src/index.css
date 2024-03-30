@@ -9,6 +9,10 @@
   background-color: #c2ccbc;
 }
 
+.hover-secondary:hover {
+  background-color: #c2ccbc;
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -51,4 +55,10 @@
 
 p {
   font-size: 20px;
+}
+
+@media (min-height: calc(100vh - 112px)) {
+  .height-media {
+    height: calc(100vh - 112px);
+  }
 }

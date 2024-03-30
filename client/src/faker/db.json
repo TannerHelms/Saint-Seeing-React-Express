@@ -1,11 +1,13 @@
 {
     "users": [
         {
-            "name": "John Doe",
-            "address": "7603 Volkman Flat",
-            "age": 25,
-            "profileImage": "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600",
-            "backgroundImage": "https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "id": 1,
+            "firstName": "John",
+            "lastName": "Doe",
+            "address": "123 Main Street",
+            "age": 30,
+            "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://images.pexels.com/photos/1955134/pexels-photo-1955134.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "isHost": false,
             "latitude": 31.7517,
             "longitude": 118.5934,
@@ -19,7 +21,9 @@
             ]
         },
         {
-            "name": "Jane Smith",
+            "id": 2,
+            "firstName": "Jane",
+            "lastName": "Smith",
             "address": "5495 Priory Close",
             "age": 23,
             "profileImage": "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -37,7 +41,9 @@
             ]
         },
         {
-            "name": "David Johnson",
+            "id": 3,
+            "firstName": "David",
+            "lastName": "Johnson",
             "address": "650 Derwent Close",
             "age": 33,
             "profileImage": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -55,7 +61,9 @@
             ]
         },
         {
-            "name": "Emily Wilson",
+            "id": 4,
+            "firstName": "Emily",
+            "lastName": "Wilson",
             "address": "84348 Halvorson Manors",
             "age": 27,
             "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -73,7 +81,9 @@
             ]
         },
         {
-            "name": "Michael Brown",
+            "id": 5,
+            "firstName": "Michael",
+            "lastName": "Brown",
             "address": "15684 Norberto Valley",
             "age": 52,
             "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -91,7 +101,9 @@
             ]
         },
         {
-            "name": "Sarah Davis",
+            "id": 6,
+            "firstName": "Sarah",
+            "lastName": "Davis",
             "address": "4193 Riverside",
             "age": 27,
             "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -109,7 +121,9 @@
             ]
         },
         {
-            "name": "Daniel Wilson",
+            "id": 7,
+            "firstName": "Daniel",
+            "lastName": "Wilson",
             "address": "86365 Kreiger Walk",
             "age": 26,
             "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -127,11 +141,13 @@
             ]
         },
         {
-            "name": "Olivia Taylor",
+            "id": 8,
+            "firstName": "Olivia",
+            "lastName": "Taylor",
             "address": "96412 Hermiston Ways",
             "age": 22,
             "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
-            "backgroundImage": "https://avatars.githubusercontent.com/u/83904368",
+            "backgroundImage": "https://images.pexels.com/photos/1955134/pexels-photo-1955134.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "isHost": true,
             "latitude": -60.8826,
             "longitude": 141.0818,
@@ -145,7 +161,9 @@
             ]
         },
         {
-            "name": "Matthew Anderson",
+            "id": 9,
+            "firstName": "Matthew",
+            "lastName": "Anderson",
             "address": "4280 N Front Street",
             "age": 37,
             "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -163,7 +181,9 @@
             ]
         },
         {
-            "name": "Emma Martinez",
+            "id": 10,
+            "firstName": "Emma",
+            "lastName": "Martinez",
             "address": "565 Furman Villages",
             "age": 47,
             "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",

@@ -10,7 +10,15 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { ellipse, square, triangle } from "ionicons/icons";
+import {
+  chatbox,
+  ellipse,
+  home,
+  homeOutline,
+  person,
+  square,
+  triangle,
+} from "ionicons/icons";
 import LoginScreen from "./pages/login";
 import Home from "./pages/home";
 import Messages from "./pages/messages";
@@ -64,15 +72,15 @@ const App = () => {
           {navbar && (
             <IonTabBar slot="bottom">
               <IonTabButton tab="home" href="/home">
-                <IonIcon aria-hidden="true" icon={triangle} />
+                <IonIcon aria-hidden="true" icon={home} />
                 <IonLabel>Home</IonLabel>
               </IonTabButton>
               <IonTabButton tab="messages" href="/messages">
-                <IonIcon aria-hidden="true" icon={ellipse} />
+                <IonIcon aria-hidden="true" icon={chatbox} />
                 <IonLabel>Messages</IonLabel>
               </IonTabButton>
               <IonTabButton tab="profile" href="/profile">
-                <IonIcon aria-hidden="true" icon={ellipse} />
+                <IonIcon aria-hidden="true" icon={person} />
                 <IonLabel>Profile</IonLabel>
               </IonTabButton>
             </IonTabBar>

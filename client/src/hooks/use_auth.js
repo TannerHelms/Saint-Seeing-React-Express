@@ -1,30 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import useUsers from "../api.js/use_users";
 import { turnOnNavbar } from "../store/navbar_slice";
 import useInit from "./use_init";
-import { useSelector } from "react-redux";
-import { token as tokenFn } from "../store/token_slice";
 
 const useAuth = () => {
-    const { api, navigate, dispatch } = useInit();
-    const token = useSelector(tokenFn)
-
-    const getMe = () => api.get("/users/me");
-
-    const query = {
-        queryKey: ["user"],
-        queryFn: getMe,
-        enabled: !!token.value,
-    }
-
-    const { data: user, isLoading, error } = useQuery(query);
+    const { navigate, dispatch } = useInit();
+    const { me } = useUsers();
 
     useEffect(() => {
-        if (error) navigate.replace("/login");
-        if (user) dispatch(turnOnNavbar())
-    }, [user, error])
+        if (me?.error) navigate.replace("/login");
+        if (me?.data?.id) dispatch(turnOnNavbar())
+    }, [me])
 
-    return { user: user?.id ? user : user?.user, isLoading };
+    return me;
 }
 
 export default useAuth;

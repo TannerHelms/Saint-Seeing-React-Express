@@ -1,21 +1,15 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
 import { useDispatch } from "react-redux";
-import useAuth from "../hooks/use_auth";
 import useUsers from "../api.js/use_users";
-import HomeTile from "../components/home_tile";
-import Spinner from "../components/ui/spinner";
+import HomeTile from "../components/home_container";
 import Header from "../components/ui/header";
+import Spinner from "../components/ui/spinner";
+import useAuth from "../hooks/use_auth";
 
 const Home = () => {
   useAuth();
-  const dispatch = useDispatch();
   const { users } = useUsers();
+
+  if (!users.data) return null;
 
   return (
     <Header title="Home">

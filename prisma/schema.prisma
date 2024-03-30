@@ -20,16 +20,24 @@ model User {
   lastName      String
   email         String   @unique
   password_hash String
+  profileId     Int      @unique
   profile       Profile  @relation(fields: [profileId], references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  profileId     Int      @unique
 }
 
 model Profile {
   id              Int      @id @default(autoincrement())
+  address         String?
   age             Int?
-  profileImageUrl String?
+  profileImage    String?
+  backgroundImage String?
+  host            Boolean  @default(false)
+  longitude       Float?
+  latitude        Float?
+  city            String?
+  bio             String?
+  rules           String[]
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   user            User?

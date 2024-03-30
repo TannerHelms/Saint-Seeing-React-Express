@@ -1,6 +1,6 @@
-import { IonAvatar, IonButton, IonImg, useIonRouter } from "@ionic/react";
-import { Space } from "@mantine/core";
+import { IonButton, useIonRouter } from "@ionic/react";
 import Banner from "./ui/banner";
+import UserDetails from "./ui/user_details";
 
 const HomeTile = ({ user }) => {
   const navigate = useIonRouter();
@@ -10,20 +10,12 @@ const HomeTile = ({ user }) => {
   };
 
   return (
-    <div className="bg-red p-7 color-secondary rounded-lg w-full">
+    <div className="bg-red p-5 color-secondary rounded-lg w-full">
       {/* IMAGES */}
       <Banner user={user} />
-
       {/* USER DETAILS */}
       <div className="space-y-4">
-        <div className="flex-between">
-          <p>{user.name}</p>
-          <p>location here</p>
-        </div>
-        <div className="flex-between">
-          <p>{user.city}</p>
-          <p>{user.host ? "Host" : "Traveler"}</p>
-        </div>
+        <UserDetails user={user} />
         <IonButton expand="full" shape="round" onClick={handleViewProfile}>
           View Profile
         </IonButton>

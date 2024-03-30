@@ -23,7 +23,7 @@ export class UsersRepository {
   }
 
 
-  async createUser({email, password, firstName, lastName}: CreateUserPayload) {
+  async createUser({ email, password, firstName, lastName }: CreateUserPayload) {
     return this.db.user.create({
       data: {
         email: email,
@@ -42,6 +42,9 @@ export class UsersRepository {
       where: {
         id: id
       },
+      include: {
+        profile: true,
+      }
     });
   }
 }
