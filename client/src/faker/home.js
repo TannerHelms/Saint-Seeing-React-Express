@@ -7,7 +7,7 @@ const generateUsers = (ct) => {
     for (let i = 0; i < ct; i++) {
         const user = {
             address: faker.location.streetAddress(),
-            age: faker.datatype.number({ min: 18, max: 65 }),
+            age: faker.number.int({ min: 18, max: 65 }),
             backgroundImage: faker.image.avatar(),
             isHost: faker.datatype.boolean(),
             latitude: faker.location.latitude(),

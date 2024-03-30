@@ -2,7 +2,7 @@ import { IonButton } from "@ionic/react";
 import { Input, PasswordInput, TextInput, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import useLogin from "../hooks/use_login";
-import Avatar from "./avatar";
+import Avatar from "./ui/avatar";
 import { z } from "zod";
 
 const schema = z.object({
@@ -20,6 +20,10 @@ const LoginScreen = (props) => {
     validate: zodResolver(schema),
   });
 
+  const handleSubmit = (e) => {
+    login(e);
+  };
+
   return (
     <div {...props}>
       <div className="col w-full">
@@ -29,7 +33,7 @@ const LoginScreen = (props) => {
           size="120px"
         />
         <Title>Sign In</Title>
-        <form onSubmit={form.onSubmit(login)} className="col w-full">
+        <form onSubmit={form.onSubmit(handleSubmit)} className="col w-full">
           <p className="text-center text-red-600">{error && error.message}</p>
           <TextInput
             className="w-full br"

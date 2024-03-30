@@ -19,17 +19,12 @@ export class Api {
     if (body) {
       options.data = body;
     }
-    try {
-      const res = await CapacitorHttp.request(options);
-      if (res.status === 200) {
-        return res.data;
-      } else {
-        throw new Error(res.error);
-      }
-      // const res = await axios(`${this.baseUrl}${uri}`, options);
-    } catch (error) {
-      console.log(error)
-      throw new Error(error.response);
+
+    const res = await CapacitorHttp.request(options);
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      throw new Error(res.data.error);
     }
   }
 

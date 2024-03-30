@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.color-background {
+  background-color: #eef2f3;
+}
+.color-secondary {
+  background-color: #c2ccbc;
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -35,4 +42,13 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+p {
+  font-size: 20px;
 }

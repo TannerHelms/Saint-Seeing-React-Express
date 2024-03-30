@@ -28,16 +28,16 @@ const queryClient = new QueryClient({
 });
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <QueryClientProvider client={queryClient}>
-          <MantineProvider theme={appTheme} withGlobalStyles withNormalizeCss>
-            <App />
-          </MantineProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider theme={appTheme} withGlobalStyles withNormalizeCss>
+          <App />
+        </MantineProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </PersistGate>
+  </Provider>
+  // </React.StrictMode>
 );

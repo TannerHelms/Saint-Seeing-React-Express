@@ -1,0 +1,184 @@
+{
+    "users": [
+        {
+            "name": "John Doe",
+            "address": "7603 Volkman Flat",
+            "age": 25,
+            "profileImage": "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "isHost": false,
+            "latitude": 31.7517,
+            "longitude": 118.5934,
+            "host": true,
+            "city": "East Skylar",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No smoking",
+                "No pets allowed",
+                "Quiet hours after 10 PM"
+            ]
+        },
+        {
+            "name": "Jane Smith",
+            "address": "5495 Priory Close",
+            "age": 23,
+            "profileImage": "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "isHost": true,
+            "latitude": 43.011,
+            "longitude": 74.5062,
+            "host": true,
+            "city": "Strosinfort",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No parties or events",
+                "No loud music",
+                "Respect the neighbors"
+            ]
+        },
+        {
+            "name": "David Johnson",
+            "address": "650 Derwent Close",
+            "age": 33,
+            "profileImage": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "isHost": false,
+            "latitude": 54.4675,
+            "longitude": 132.1548,
+            "host": false,
+            "city": "Port Yvetteview",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No smoking",
+                "No parties or events",
+                "Clean up after yourself"
+            ]
+        },
+        {
+            "name": "Emily Wilson",
+            "address": "84348 Halvorson Manors",
+            "age": 27,
+            "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://images.pexels.com/photos/1955134/pexels-photo-1955134.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "isHost": false,
+            "latitude": 45.9893,
+            "longitude": 145.709,
+            "host": true,
+            "city": "Hollieside",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No pets allowed",
+                "No smoking",
+                "Respect the property"
+            ]
+        },
+        {
+            "name": "Michael Brown",
+            "address": "15684 Norberto Valley",
+            "age": 52,
+            "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://images.pexels.com/photos/2166711/pexels-photo-2166711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "isHost": false,
+            "latitude": -48.5235,
+            "longitude": -165.4108,
+            "host": false,
+            "city": "Shakiratown",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No parties or events",
+                "No loud music",
+                "Clean up after yourself"
+            ]
+        },
+        {
+            "name": "Sarah Davis",
+            "address": "4193 Riverside",
+            "age": 27,
+            "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://images.pexels.com/photos/1659438/pexels-photo-1659438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "isHost": true,
+            "latitude": -15.315,
+            "longitude": -173.3171,
+            "host": true,
+            "city": "South Brendenburgh",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No smoking",
+                "No pets allowed",
+                "Quiet hours after 10 PM"
+            ]
+        },
+        {
+            "name": "Daniel Wilson",
+            "address": "86365 Kreiger Walk",
+            "age": 26,
+            "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://avatars.githubusercontent.com/u/90428944",
+            "isHost": true,
+            "latitude": -64.6983,
+            "longitude": 39.4698,
+            "host": true,
+            "city": "North Miami",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No parties or events",
+                "No loud music",
+                "Respect the neighbors"
+            ]
+        },
+        {
+            "name": "Olivia Taylor",
+            "address": "96412 Hermiston Ways",
+            "age": 22,
+            "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://avatars.githubusercontent.com/u/83904368",
+            "isHost": true,
+            "latitude": -60.8826,
+            "longitude": 141.0818,
+            "host": true,
+            "city": "Bodetown",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No smoking",
+                "No pets allowed",
+                "Quiet hours after 10 PM"
+            ]
+        },
+        {
+            "name": "Matthew Anderson",
+            "address": "4280 N Front Street",
+            "age": 37,
+            "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1052.jpg",
+            "isHost": false,
+            "latitude": -35.235,
+            "longitude": 5.9659,
+            "host": true,
+            "city": "Lueland",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No parties or events",
+                "No loud music",
+                "Clean up after yourself"
+            ]
+        },
+        {
+            "name": "Emma Martinez",
+            "address": "565 Furman Villages",
+            "age": 47,
+            "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "backgroundImage": "https://avatars.githubusercontent.com/u/27285719",
+            "isHost": true,
+            "latitude": -35.0406,
+            "longitude": 133.5236,
+            "host": true,
+            "city": "North Christophe",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id luctus tincidunt, nisl nunc lacinia urna, a ultrices nunc nunc at nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc. Sed id nunc auctor, aliquet nunc a, tincidunt nunc.",
+            "rules": [
+                "No smoking",
+                "No pets allowed",
+                "Quiet hours after 10 PM"
+            ]
+        }
+    ]
+}
