@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 import { token as tokenFn } from "../store/token_slice";
 import { flattenObject } from "../utils/flatten";
 
-const baseUrl = "http://10.100.1.41:3001";
-
 const useUsers = (id) => {
     const api = useApi();
     const queryClient = useQueryClient();
@@ -26,7 +24,7 @@ const useUsers = (id) => {
 
     // CRUD FUNCATIONALITY
     const all = async () => {
-        const users = await axios.get(`${baseUrl}/users`).then((res) => res.data);
+        const users = await api.get('/users').then((res) => res.data);
         users.map((user) => {
             queryClient.setQueryData(["user", user.id], user);
         });
@@ -34,7 +32,7 @@ const useUsers = (id) => {
     };
 
     const get = async () => {
-        const user = await axios.get(`${baseUrl}/users/${id}`)
+        const user = await api.get(`/users/${id}`)
         return flattenObject(user)
     };
 

@@ -200,5 +200,22 @@
                 "Quiet hours after 10 PM"
             ]
         }
+    ],
+    "chats": [
+        {
+            "id": "TLUi9L0nPVeJRMXw4v6EfJ85j522CjxVwqUxh6TlOAJN7BnGIuesJvs2",
+            "last_message": "ssdfgsdfg",
+            "last_message_time": "March 23, 2024 at 12:43:41 AM UTC-6",
+            "timestamp": "March 18, 2024 at 8:25:40 PM UTC-6",
+            "userIds": [
+                "TLUi9L0nPVeJRMXw4v6EfJ85j522",
+                "CjxVwqUxh6TlOAJN7BnGIuesJvs2"
+            ],
+            "user_a": "/users/TLUi9L0nPVeJRMXw4v6EfJ85j522",
+            "user_a_id": "TLUi9L0nPVeJRMXw4v6EfJ85j522",
+            "user_b": "/users/CjxVwqUxh6TlOAJN7BnGIuesJvs2",
+            "user_b_id": "CjxVwqUxh6TlOAJN7BnGIuesJvs2"
+        }
+        
     ]
 }

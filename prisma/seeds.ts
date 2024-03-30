@@ -2,13 +2,14 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import { config } from "dotenv";
 import * as bcrypt from "bcryptjs";
+import { CreateUsers } from './users';
 config();
 
 
 async function main() {
   await prisma.user.upsert({
     where: {
-      id: 1,
+      email: process.env.ADMIN_EMAIL!!,
     },
     create: {
       firstName: "SITE",
@@ -16,9 +17,7 @@ async function main() {
       email: process.env.ADMIN_EMAIL!!,
       password_hash: bcrypt.hashSync(process.env.ADMIN_PASSWORD!!),
       profile: {
-        create: {
-          id: 1,
-        }
+        create: {}
       }
     },
     update: {
@@ -26,8 +25,8 @@ async function main() {
       password_hash: bcrypt.hashSync(process.env.ADMIN_PASSWORD!!),
     }
   })
-  // TODO: put default data in the database
-  console.log(process.env);
+
+  await CreateUsers(prisma, 10);
 }
 
 main()

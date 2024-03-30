@@ -10,10 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// id Int @id @default(autoincrement())
-// createdAt DateTime @default(now())
-// updatedAt DateTime @updatedAt
-
 model User {
   id            Int      @id @default(autoincrement())
   firstName     String
@@ -27,18 +23,57 @@ model User {
 }
 
 model Profile {
-  id              Int      @id @default(autoincrement())
-  address         String?
-  age             Int?
-  profileImage    String?
-  backgroundImage String?
-  host            Boolean  @default(false)
-  longitude       Float?
-  latitude        Float?
-  city            String?
-  bio             String?
-  rules           String[]
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  user            User?
+  id                    Int            @id @default(autoincrement())
+  address               String?
+  age                   Int?
+  profileImage          String?
+  backgroundImage       String?
+  host                  Boolean        @default(false)
+  longitude             Float?
+  latitude              Float?
+  city                  String?
+  bio                   String?
+  rules                 String[]
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  user                  User?
+  conversationsCreated  Conversation[] @relation("ConversationCreated")
+  conversationsReceived Conversation[] @relation("ConversationReceived")
+  sentMessages          Message[]      @relation("sender")
+  reveivedMessages      Message[]      @relation("receiver")
+}
+
+model Conversation {
+  id Int @id @default(autoincrement())
+
+  messages Message[]
+
+  createdAt     DateTime @default(now())
+  lastMessage   String?
+  lastMessageAt DateTime @default(now())
+
+  profile1Id Int
+  profile2Id Int
+
+  profile1 Profile? @relation("ConversationCreated", fields: [profile1Id], references: [id])
+  profile2 Profile? @relation("ConversationReceived", fields: [profile2Id], references: [id])
+
+  @@unique([profile1Id, profile2Id])
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+
+  body      String?
+  image     String?
+  createdAt DateTime @default(now())
+
+  senderId   Int
+  receiverId Int
+
+  sender   Profile @relation("sender", fields: [senderId], references: [id])
+  receiver Profile @relation("receiver", fields: [receiverId], references: [id])
+
+  conversationId Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
 }
