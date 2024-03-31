@@ -47,4 +47,12 @@ export class UsersRepository {
       }
     });
   }
+
+  async getUsers() {
+    return this.db.user.findMany({
+      include: {
+        profile: true,
+      }
+    });
+  }
 }

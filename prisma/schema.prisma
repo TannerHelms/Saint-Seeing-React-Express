@@ -40,12 +40,25 @@ model Profile {
   conversationsCreated  Conversation[] @relation("ConversationCreated")
   conversationsReceived Conversation[] @relation("ConversationReceived")
   sentMessages          Message[]      @relation("sender")
-  reveivedMessages      Message[]      @relation("receiver")
+  receivedMessages      Message[]      @relation("receiver")
+  receivedRequest       Request[]      @relation("from")
+  sentRequest           Request[]      @relation("to")
+}
+
+model Request {
+  fromId Int
+  toId   Int
+  from   Profile @relation("from", fields: [fromId], references: [id])
+  to     Profile @relation("to", fields: [toId], references: [id])
+
+  accepted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@id([fromId, toId])
 }
 
 model Conversation {
-  id Int @id @default(autoincrement())
-
   messages Message[]
 
   createdAt     DateTime @default(now())
@@ -58,7 +71,7 @@ model Conversation {
   profile1 Profile? @relation("ConversationCreated", fields: [profile1Id], references: [id])
   profile2 Profile? @relation("ConversationReceived", fields: [profile2Id], references: [id])
 
-  @@unique([profile1Id, profile2Id])
+  @@id([profile1Id, profile2Id])
 }
 
 model Message {
@@ -75,5 +88,5 @@ model Message {
   receiver Profile @relation("receiver", fields: [receiverId], references: [id])
 
   conversationId Int
-  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  Conversation   Conversation? @relation(fields: [senderId, receiverId], references: [profile1Id, profile2Id])
 }

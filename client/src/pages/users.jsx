@@ -5,6 +5,8 @@ const Users = ({ match }) => {
   const id = match.params.id;
   const { user } = useUsers(id);
 
+  console.log(user.data);
+
   if (!user?.data?.id) return null;
 
   return (

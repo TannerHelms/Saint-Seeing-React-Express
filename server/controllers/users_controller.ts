@@ -6,14 +6,14 @@ import { UsersRepository } from "../repositories/users_respository";
 export const buildUsersController = (usersRepository: UsersRepository): Router => {
   const router = Router();
 
-  /**
-   * POST / - Create a new user.
-   * @name POST/api/users
-   * @param {Request} req - The Express request object.
-   * @param {Response} res - The Express response object.
-   * @returns {User, string} user token
-   */
-  router.post("/", async (req, res) => {
+  // Get all users
+  router.get("/", authMiddleware, async (req, res) => {
+    const users = await usersRepository.getUsers();
+    res.json({ users });
+  });
+
+  // Create a user
+  router.post("/", authMiddleware, async (req, res) => {
     const user = await usersRepository.createUser(req.body);
     const token = jwt.sign({
       userId: user.id,
@@ -22,15 +22,19 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
     res.json({ user, token });
   });
 
-  /**
-   * GET /me - Get the current user.
-   * @name GET/api/users/me
-   * @param {string} token - The JWT token.
-   * @returns {User} user A Promise that resolves when the user is found and the response is sent.
-   */
+  // Get current user
   router.get("/me", authMiddleware, (req, res) => {
     res.json({ user: req.user });
   });
+
+
+  // Get a single user
+  router.get("/:id", authMiddleware, async (req, res) => {
+    const id = req.params.id;
+    const user = await usersRepository.getUserById(parseInt(id));
+    res.json({ user });
+  });
+
 
   return router;
 }

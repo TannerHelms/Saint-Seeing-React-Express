@@ -3,6 +3,8 @@ const prisma = new PrismaClient();
 import { config } from "dotenv";
 import * as bcrypt from "bcryptjs";
 import { CreateUsers } from './users';
+import { faker } from '@faker-js/faker';
+import CreateRandomRequests from './conversations';
 config();
 
 
@@ -17,7 +19,12 @@ async function main() {
       email: process.env.ADMIN_EMAIL!!,
       password_hash: bcrypt.hashSync(process.env.ADMIN_PASSWORD!!),
       profile: {
-        create: {}
+        create: {
+          backgroundImage: faker.image.url(),
+          profileImage: faker.image.avatar(),
+          city: faker.location.city(),
+          bio: faker.lorem.paragraph(),
+        }
       }
     },
     update: {
@@ -27,6 +34,7 @@ async function main() {
   })
 
   await CreateUsers(prisma, 10);
+  await CreateRandomRequests(prisma, 10);
 }
 
 main()

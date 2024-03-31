@@ -24,11 +24,13 @@ const useUsers = (id) => {
 
     // CRUD FUNCATIONALITY
     const all = async () => {
-        const users = await api.get('/users').then((res) => res.data);
-        users.map((user) => {
-            queryClient.setQueryData(["user", user.id], user);
+        const users = (await api.get('/users')).users;
+        return users.map((user) => {
+            const flat = flattenObject(user);
+            queryClient.setQueryData(["user", user.id], flat);
+            return flat;
         });
-        return users;
+
     };
 
     const get = async () => {

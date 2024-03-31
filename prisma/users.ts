@@ -11,7 +11,7 @@ export async function CreateUsers(prisma: PrismaClient, numUsers: number) {
         const address = faker.location.streetAddress();
         const age = faker.number.int({ min: 18, max: 65 });
         const profileImage = faker.image.avatar();
-        const backgroundImage = faker.image.unsplash.imageUrl();
+        const backgroundImage = faker.image.url();
         const host = faker.datatype.boolean();
         const longitude = faker.location.longitude();
         const latitude = faker.location.latitude();

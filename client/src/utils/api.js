@@ -4,7 +4,7 @@ import { store } from "../store/store";
 import { CapacitorHttp } from '@capacitor/core';
 
 export class Api {
-  baseUrl = "http://10.100.1.41:3000";
+  baseUrl = "http://localhost:3000";
   async makeRequest(uri, method, body) {
     const token = store.getState().token.value;
     const options = {
