@@ -2,22 +2,24 @@ import { faker } from "@faker-js/faker";
 import { PrismaClient } from "@prisma/client";
 
 
-async function CreateRandomRequests(db: PrismaClient, ct: number) {
-    for (let i = 0; i < ct; i++) {
-        const userId = i + 1;
-
-        for (let j = 0; j < 7; j++) {
-            const requestId = faker.number.int({ min: 1, max: ct });
+async function CreateConversations(db: PrismaClient, userCount: number): Promise<void> {
+    for (let i = 1; i <= userCount; i++) {
+        for (let j = 1; j <= 5; j++) {
+            const profile1Id = i;
+            const profile2Id = Math.floor(Math.random() * userCount) + 1;
             try {
-                await db.request.create({
+
+                await db.conversation.create({
                     data: {
-                        fromId: userId,
-                        toId: requestId,
-                    }
+                        profile1Id,
+                        profile2Id,
+                        lastMessage: faker.lorem.sentence(),
+                        lastMessageAt: faker.date.recent(),
+                    },
                 });
             } catch { }
         }
     }
 }
 
-export default CreateRandomRequests;
+export default CreateConversations;

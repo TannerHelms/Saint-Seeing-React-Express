@@ -13,12 +13,15 @@ import { buildHomeController } from "./server/controllers/home_controller";
 import { UsersRepository } from "./server/repositories/users_respository";
 import { RequestsRepository } from "./server/repositories/requests_repository";
 import { buildRequestsController } from "./server/controllers/requests_controller";
+import { buildConversationsController } from "./server/controllers/conversations_controller";
+import { ConversationsRepository } from "./server/repositories/conversations_repository";
 
 
 
 const db = new PrismaClient();
 const usersRepository = UsersRepository.getInstance(db);
 const requestsRepository = RequestsRepository.getInstance(db);
+const conversationsRepository = ConversationsRepository.getInstance(db);
 
 dotenv.config();
 
@@ -55,6 +58,7 @@ app.use("/", buildHomeController());
 app.use("/users", buildUsersController(usersRepository));
 app.use("/sessions", buildSessionsController(db));
 app.use("/requests", buildRequestsController(requestsRepository));
+app.use("/conversations", buildConversationsController(conversationsRepository));
 
 
 app.listen(process.env.PORT || 3000, () => {

@@ -46,6 +46,7 @@ import { useSelector } from "react-redux";
 import { nav } from "./store/navbar_slice";
 import Login from "./pages/login";
 import Users from "./pages/users";
+import RequestsSent from "./pages/requests_sent";
 
 setupIonicReact();
 
@@ -64,6 +65,7 @@ const App = () => {
             <Route path="/messages" component={Messages} exact />
             <Route path="/profile" component={Profile} exact />
             <Route path="/users/:id" component={Users} />
+            <Route path="/requests_sent" component={RequestsSent} />
           </IonRouterOutlet>
 
           {!navbar && <IonTabBar></IonTabBar>}

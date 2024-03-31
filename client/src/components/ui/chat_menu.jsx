@@ -13,36 +13,44 @@ import {
   useIonRouter,
 } from "@ionic/react";
 
-import { exit, navigate, person } from "ionicons/icons";
+import {
+  chatbox,
+  chatboxEllipses,
+  chatboxEllipsesSharp,
+  exit,
+  navigate,
+  person,
+} from "ionicons/icons";
 import MenuTile from "./menu_tile";
+import { menuController } from "@ionic/core/components";
 
 const menuContent = [
   {
-    title: "Profile",
-    path: "/profile",
-    icon: <IonIcon icon={person} size="large" />,
+    title: "Messages",
+    path: "/messages",
+    icon: <IonIcon icon={chatbox} size="large" />,
   },
   {
-    title: "Settings",
-    path: "/settings",
-    icon: <IonIcon icon={person} size="large" />,
+    title: "Requests",
+    path: "/messages",
+    icon: <IonIcon icon={chatboxEllipses} size="large" />,
   },
   {
-    title: "Logout",
-    path: "/logout",
-    icon: <IonIcon icon={exit} size="large" />,
+    title: "Sent Requests",
+    path: "/requests_sent",
+    icon: <IonIcon icon={chatboxEllipsesSharp} size="large" />,
   },
 ];
 
-const ProfileMenu = () => {
+const ChatMenu = () => {
   const navigate = useIonRouter();
 
   return (
     <>
-      <IonMenu contentId="main-content" menuId="profile">
+      <IonMenu contentId="main-content" menuId="chats">
         <IonHeader>
           <IonToolbar>
-            <IonTitle>Profile Settings</IonTitle>
+            <IonTitle>Chats</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
@@ -52,7 +60,10 @@ const ProfileMenu = () => {
                 key={idx}
                 icon={item.icon}
                 text={item.title}
-                onClick={() => navigate.push(item.path)}
+                onClick={() => {
+                  menuController.close("chats");
+                  navigate.push(item.path);
+                }}
               />
             ))}
           </div>
@@ -63,4 +74,4 @@ const ProfileMenu = () => {
   );
 };
 
-export default ProfileMenu;
+export default ChatMenu;
