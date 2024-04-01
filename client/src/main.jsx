@@ -1,16 +1,16 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
-import "./index.css";
-import { Provider } from "react-redux";
-import { persistor, store } from "./store/store";
 import { MantineProvider } from "@mantine/core";
-import appTheme from "./theme.js";
 import "@mantine/core/styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { PersistGate } from "redux-persist/integration/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import App from "./App";
+import "./index.css";
+import { persistor, store } from "./store/store";
+import appTheme from "./theme.js";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

@@ -10,8 +10,9 @@ export const buildConversationsController = (repository: ConversationsRepository
     // Get all the conversation that a user is in
     router.get("/", authMiddleware, async (req, res) => {
         try {
-            const conversation = await repository.getByUserId(req.user!!.id);
-            res.json({ conversation });
+            const conversations = await repository.getByUserId(req.user!!.id);
+            conversations.sort((a, b) => b.lastMessageAt.getTime() - a.lastMessageAt.getTime());
+            res.json({ conversations });
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Conversation has already been created" });
         }

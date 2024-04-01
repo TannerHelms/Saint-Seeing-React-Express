@@ -1,4 +1,3 @@
-import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -10,18 +9,8 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import {
-  chatbox,
-  ellipse,
-  home,
-  homeOutline,
-  person,
-  square,
-  triangle,
-} from "ionicons/icons";
-import LoginScreen from "./pages/login";
-import Home from "./pages/home";
-import Messages from "./pages/messages";
+import { chatbox, home, person } from "ionicons/icons";
+import { Redirect, Route } from "react-router-dom";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -32,21 +21,26 @@ import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
 
 /* Optional CSS utils that can be commented out */
-import "@ionic/react/css/padding.css";
+import "@ionic/react/css/display.css";
+import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/padding.css";
 import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
-import "@ionic/react/css/flex-utils.css";
-import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import "./theme/variables.css";
-import Profile from "./pages/profile";
 import { useSelector } from "react-redux";
+import Home from "./pages/( HOME )/home";
+import Users from "./pages/( HOME )/users";
+import Messages from "./pages/( MESSAGES )/messages";
+import RequestsSent from "./pages/( MESSAGES )/requests_sent";
+import Profile from "./pages/( PROFILE )/profile";
+import Login from "./pages/( SIGN_IN )/login";
 import { nav } from "./store/navbar_slice";
-import Login from "./pages/login";
-import Users from "./pages/users";
-import RequestsSent from "./pages/requests_sent";
+import "./theme/variables.css";
+import ProfileMenu from "./components/menu/profile_menu";
+import ChatMenu from "./components/menu/chat_menu";
+import RequestsReceived from "./pages/( MESSAGES )/requests_received";
 
 setupIonicReact();
 
@@ -56,6 +50,10 @@ const App = () => {
   return (
     <IonApp>
       <IonReactRouter>
+        {/* MENUS */}
+        <ProfileMenu />
+        <ChatMenu />
+
         <IonTabs>
           {/* ROUTES */}
           <IonRouterOutlet>
@@ -66,6 +64,7 @@ const App = () => {
             <Route path="/profile" component={Profile} exact />
             <Route path="/users/:id" component={Users} />
             <Route path="/requests_sent" component={RequestsSent} />
+            <Route path="/requests_received" component={RequestsReceived} />
           </IonRouterOutlet>
 
           {!navbar && <IonTabBar></IonTabBar>}

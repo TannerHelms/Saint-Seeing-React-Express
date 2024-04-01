@@ -1,6 +1,6 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { useDispatch } from "react-redux";
-import LoginScreen from "../components/login_container";
+import LoginScreen from "../../components/login_container";
 
 const Login = () => {
   const dispatch = useDispatch();

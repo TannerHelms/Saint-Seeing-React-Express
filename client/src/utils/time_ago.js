@@ -2,7 +2,7 @@ const timeAgo = (lastMessageTime) => {
     const currentTime = new Date();
 
     if (lastMessageTime) {
-        var messageTime = lastMessageTime.toDate();
+        var messageTime = lastMessageTime;
     } else {
         var messageTime = new Date();
     }

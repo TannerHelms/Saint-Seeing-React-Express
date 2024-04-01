@@ -1,12 +1,13 @@
 import { useDispatch } from "react-redux";
-import useRequests from "../api.js/use_requests";
-import RequestsSentContainer from "../components/requests_sent_container";
-import Header from "../components/ui/header";
-import { turnOffNavbar } from "../store/navbar_slice";
+import useRequests from "../../api.js/use_requests";
+import RequestsSentContainer from "../../components/requests_sent_container";
+import Header from "../../components/ui/header";
+import { turnOffNavbar } from "../../store/navbar_slice";
+import useAuth from "../../hooks/use_auth";
 
 const RequestsSent = () => {
+  useAuth(false);
   const { requests } = useRequests();
-  const dispatch = useDispatch();
 
   if (!requests?.data) return null;
 

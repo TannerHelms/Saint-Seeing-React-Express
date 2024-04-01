@@ -21,19 +21,14 @@ import {
   navigate,
   person,
 } from "ionicons/icons";
-import MenuTile from "./menu_tile";
+import MenuTile from "../ui/menu_tile";
 import { menuController } from "@ionic/core/components";
 
 const menuContent = [
   {
-    title: "Messages",
-    path: "/messages",
+    title: "Received Requests",
+    path: "/requests_received",
     icon: <IonIcon icon={chatbox} size="large" />,
-  },
-  {
-    title: "Requests",
-    path: "/messages",
-    icon: <IonIcon icon={chatboxEllipses} size="large" />,
   },
   {
     title: "Sent Requests",
@@ -47,7 +42,7 @@ const ChatMenu = () => {
 
   return (
     <>
-      <IonMenu contentId="main-content" menuId="chats">
+      <IonMenu menuId="chat-menu" contentId="main-content">
         <IonHeader>
           <IonToolbar>
             <IonTitle>Chats</IonTitle>
@@ -61,7 +56,7 @@ const ChatMenu = () => {
                 icon={item.icon}
                 text={item.title}
                 onClick={() => {
-                  menuController.close("chats");
+                  menuController.close("chat-menu");
                   navigate.push(item.path);
                 }}
               />

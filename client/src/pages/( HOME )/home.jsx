@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
-import useUsers from "../api.js/use_users";
-import HomeTile from "../components/home_container";
-import Header from "../components/ui/header";
-import Spinner from "../components/ui/spinner";
-import useAuth from "../hooks/use_auth";
+import useUsers from "../../api.js/use_users";
+import HomeTile from "../../components/home_container";
+import Header from "../../components/ui/header";
+import Spinner from "../../components/ui/spinner";
+import useAuth from "../../hooks/use_auth";
 
 const Home = () => {
   useAuth();

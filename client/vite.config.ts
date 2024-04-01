@@ -14,6 +14,6 @@ export default defineConfig({
   //   setupFiles: './src/setupTests.ts',
   // },
   server: {
-    port: 8102,
+    port: 8100,
   }
 })

@@ -14,7 +14,7 @@ import {
 } from "@ionic/react";
 
 import { exit, navigate, person } from "ionicons/icons";
-import MenuTile from "./menu_tile";
+import MenuTile from "../ui/menu_tile";
 
 const menuContent = [
   {
@@ -39,7 +39,7 @@ const ProfileMenu = () => {
 
   return (
     <>
-      <IonMenu contentId="main-content" menuId="profile">
+      <IonMenu menuId="profile-menu" contentId="main-content">
         <IonHeader>
           <IonToolbar>
             <IonTitle>Profile Settings</IonTitle>
