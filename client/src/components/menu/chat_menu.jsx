@@ -1,28 +1,17 @@
 import {
-  IonButton,
-  IonButtons,
   IonContent,
   IonHeader,
   IonIcon,
   IonMenu,
-  IonMenuButton,
-  IonMenuToggle,
   IonPage,
   IonTitle,
   IonToolbar,
   useIonRouter,
 } from "@ionic/react";
 
-import {
-  chatbox,
-  chatboxEllipses,
-  chatboxEllipsesSharp,
-  exit,
-  navigate,
-  person,
-} from "ionicons/icons";
-import MenuTile from "../ui/menu_tile";
 import { menuController } from "@ionic/core/components";
+import { chatbox, chatboxEllipsesSharp } from "ionicons/icons";
+import MenuTile from "../ui/menu_tile";
 
 const menuContent = [
   {

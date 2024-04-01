@@ -2,9 +2,8 @@ import { IonButton } from "@ionic/react";
 import { Input, PasswordInput, TextInput, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import useLogin from "../hooks/use_login";
-import Avatar from "./ui/avatar";
 import { z } from "zod";
-
+import Avatar from "../components/user/avatar";
 const schema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Must be at least 6 characters"),

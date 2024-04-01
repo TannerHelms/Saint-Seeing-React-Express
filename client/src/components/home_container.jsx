@@ -1,6 +1,6 @@
 import { IonButton, useIonRouter } from "@ionic/react";
-import Banner from "./ui/banner";
-import UserDetails from "./ui/user_details";
+import Banner from "./user/banner";
+import UserDetails from "./user/user_details";
 
 const HomeTile = ({ user }) => {
   const navigate = useIonRouter();

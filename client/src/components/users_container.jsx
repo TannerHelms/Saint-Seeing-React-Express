@@ -1,8 +1,9 @@
 import React from "react";
-import Banner from "./ui/banner";
-import UserDetails from "./ui/user_details";
 import { Space } from "@mantine/core";
-import UserProfile from "./ui/user_profile";
+import Banner from "./user/banner";
+import UserDetails from "./user/user_details";
+import UserProfile from "./user/user_profile";
+
 const UsersTile = ({ user, friends }) => {
   return (
     <div className="middle">

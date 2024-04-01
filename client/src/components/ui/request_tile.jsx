@@ -10,7 +10,7 @@ const RequestTile = ({ request, sent }) => {
             <p>
               {request.firstName} {request.lastName}
             </p>
-            <p>{request.createdAt.split("T")[0]}</p>
+            <p>{request.createdAt}</p>
           </div>
         </div>
         <Button className={sent ? "bg-red-500" : "bg-green-500"}>

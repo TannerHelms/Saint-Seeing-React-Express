@@ -13,6 +13,7 @@ async function CreateRandomRequests(db: PrismaClient, ct: number) {
                     data: {
                         fromId: userId,
                         toId: requestId,
+                        createdAt: faker.date.recent(),
                     }
                 });
             } catch { }
