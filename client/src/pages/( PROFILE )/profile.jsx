@@ -5,12 +5,17 @@ import ProfileContainer from "../../components/profile_container";
 import Header from "../../components/ui/header";
 import useLogout from "../../hooks/use_logout";
 import useUsers from "../../api.js/use_users";
+import { Redirect } from "react-router";
+import useNavbar from "../../hooks/use_navbar";
 
 const Profile = () => {
+  useNavbar();
   const { me } = useUsers();
   const { logout } = useLogout();
 
-  if (!me?.data) return null;
+  if (me.isLoading) return null;
+
+  if (!me.data) return <Redirect to="/login" />;
 
   const handleShowMenu = async () => {
     menuController.enable(true, "profile-menu");

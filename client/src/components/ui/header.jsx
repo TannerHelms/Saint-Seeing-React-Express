@@ -8,26 +8,28 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonRouter,
 } from "@ionic/react";
 
 const Header = ({ title, back = false, children, icon, onClick }) => {
+  const navigate = useIonRouter();
+
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className="w-full relative p-0 m-0">
-          {icon && (
-            <IonButtons className="float-start" onClick={onClick}>
-              <IonButton>{icon}</IonButton>
-            </IonButtons>
-          )}
+        <IonToolbar>
+          <IonTitle>{title}</IonTitle>
           {back && (
             <IonButtons className="float-start">
               <IonBackButton defaultHref="/home"></IonBackButton>
             </IonButtons>
           )}
-          <IonTitle className="w-fit absolute left-1/2 -translate-x-1/2 inset-y-0">
-            {title}
-          </IonTitle>
+
+          {icon && (
+            <IonButtons slot="start" onClick={onClick}>
+              <IonButton>{icon}</IonButton>
+            </IonButtons>
+          )}
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>{children}</IonContent>

@@ -74,15 +74,12 @@ const App = () => {
             {/* <Nav> */}
             <Route path="/" render={() => <Redirect to="/home" />} exact />
             <LoginRoute path="/login" component={Login} exact />
-            <ProtectedRoute path="/home" component={Home} exact />
-            <ProtectedRoute path="/messages" component={Messages} exact />
-            <ProtectedRoute path="/profile" component={Profile} exact />
-            <ProtectedRoute path="/users/:id" component={Users} />
-            <ProtectedRoute path="/requests_sent" component={RequestsSent} />
-            <ProtectedRoute
-              path="/requests_received"
-              component={RequestsReceived}
-            />
+            <Route path="/home" component={Home} exact />
+            <Route path="/messages" component={Messages} exact />
+            <Route path="/profile" component={Profile} exact />
+            <Route path="/users/:id" component={Users} />
+            <Route path="/requests_sent" component={RequestsSent} />
+            <Route path="/requests_received" component={RequestsReceived} />
             {/* </Nav> */}
           </IonRouterOutlet>
 

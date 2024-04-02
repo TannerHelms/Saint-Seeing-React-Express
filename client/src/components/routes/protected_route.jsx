@@ -6,14 +6,11 @@ const ProtectedRoute = ({ component: Componet, path }) => {
   useNavbar();
   const { me } = useUsers();
 
-  if (me.isLoading) return null;
+  // if (me.isLoading) return null;
 
-  return (
-    <Route
-      path={path}
-      render={() => (me?.data ? <Componet /> : <Redirect to="/login" />)}
-    />
-  );
+  if (me?.data) return <Route path={path} render={() => <Componet />} />;
+
+  if (me.error) return <Redirect to="/login" />;
 };
 
 export default ProtectedRoute;

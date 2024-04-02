@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Redirect, useParams } from "react-router";
 import useUsers from "../../api.js/use_users";
 import Header from "../../components/ui/header";
 import UsersTile from "../../components/users_container";
@@ -6,7 +6,9 @@ const Users = () => {
   const id = useParams().id;
   const { user } = useUsers(id);
 
-  if (!user?.data?.id) return null;
+  if (user.isLoading) return null;
+
+  if (!user.data) return <Redirect to="/login" />;
 
   return (
     <Header title="User" back={true}>
