@@ -1,17 +1,19 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useDispatch, useSelector } from "react-redux";
 import useApi from "../hooks/use_api";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import { token as tokenFn } from "../store/token_slice";
 import { flattenObject } from "../utils/flatten";
+import { turnOnNavbar } from "../store/navbar_slice";
 
 const useUsers = (id) => {
     const api = useApi();
     const queryClient = useQueryClient();
     const token = useSelector(tokenFn)
+    const dispatch = useDispatch();
 
     // GET ME
     const getMe = async () => {
+        if (!token.value) throw new Error("No token")
         const me = (await api.get("/users/me")).user
         return flattenObject(me)
     };
@@ -19,7 +21,6 @@ const useUsers = (id) => {
     const me = useQuery({
         queryKey: ["me"],
         queryFn: getMe,
-        enabled: !!token.value,
     })
 
     // CRUD FUNCATIONALITY
@@ -30,7 +31,6 @@ const useUsers = (id) => {
             queryClient.setQueryData(["user", user.id], flat);
             return flat;
         });
-
     };
 
     const get = async () => {
@@ -43,6 +43,7 @@ const useUsers = (id) => {
     const users = useQuery({
         queryKey: ["users"],
         queryFn: all,
+        enabled: !!token.value,
     });
 
     // SINGLE USER

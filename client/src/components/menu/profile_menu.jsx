@@ -26,7 +26,11 @@ const ProfileMenu = () => {
 
   return (
     <>
-      <IonMenu menuId="profile-menu" contentId="main-content">
+      <IonMenu
+        menuId="profile-menu"
+        contentId="main-content"
+        swipeGesture={false}
+      >
         <IonHeader>
           <IonToolbar>
             <IonTitle>Profile Settings</IonTitle>

@@ -1,15 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 import useUsers from "../../api.js/use_users";
 import Header from "../../components/ui/header";
 import UsersTile from "../../components/users_container";
-import useAuth from "../../hooks/use_auth";
-import { turnOffNavbar } from "../../store/navbar_slice";
-const Users = ({ match }) => {
-  useAuth();
-  const id = match.params.id;
+const Users = () => {
+  const id = useParams().id;
   const { user } = useUsers(id);
-  const dispatch = useDispatch();
-  dispatch(turnOffNavbar());
 
   if (!user?.data?.id) return null;
 

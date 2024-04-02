@@ -1,14 +1,13 @@
-import { IonButton, IonIcon, IonMenuToggle } from "@ionic/react";
+import { menuController } from "@ionic/core/components";
+import { IonButton, IonIcon } from "@ionic/react";
 import { menu } from "ionicons/icons";
 import ProfileContainer from "../../components/profile_container";
 import Header from "../../components/ui/header";
-import useAuth from "../../hooks/use_auth";
 import useLogout from "../../hooks/use_logout";
-import ProfileMenu from "../../components/menu/profile_menu";
-import { menuController } from "@ionic/core/components";
+import useUsers from "../../api.js/use_users";
 
 const Profile = () => {
-  const me = useAuth();
+  const { me } = useUsers();
   const { logout } = useLogout();
 
   if (!me?.data) return null;

@@ -1,9 +1,9 @@
 import { IonButton } from "@ionic/react";
-import { Input, PasswordInput, TextInput, Title } from "@mantine/core";
+import { PasswordInput, TextInput, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import useLogin from "../hooks/use_login";
 import { z } from "zod";
 import Avatar from "../components/user/avatar";
+import useLogin from "../hooks/use_login";
 const schema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Must be at least 6 characters"),
@@ -11,6 +11,7 @@ const schema = z.object({
 
 const LoginScreen = (props) => {
   const { login, error } = useLogin();
+
   const form = useForm({
     initialValues: {
       email: "",
@@ -19,7 +20,7 @@ const LoginScreen = (props) => {
     validate: zodResolver(schema),
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     login(e);
   };
 

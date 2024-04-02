@@ -31,7 +31,7 @@ const ChatMenu = () => {
 
   return (
     <>
-      <IonMenu menuId="chat-menu" contentId="main-content">
+      <IonMenu menuId="chat-menu" contentId="main-content" swipeGesture={false}>
         <IonHeader>
           <IonToolbar>
             <IonTitle>Chats</IonTitle>

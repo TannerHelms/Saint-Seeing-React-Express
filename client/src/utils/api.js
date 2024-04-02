@@ -21,7 +21,7 @@ export class Api {
     }
 
     const res = await CapacitorHttp.request(options);
-    if (res.status === 200) {
+    if (res.status === 200 && !res.error) {
       return res.data;
     } else {
       throw new Error(res.data.error);

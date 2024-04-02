@@ -9,8 +9,6 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useDispatch } from "react-redux";
-import { turnOnNavbar } from "../../store/navbar_slice";
 
 const Header = ({ title, back = false, children, icon, onClick }) => {
   return (
