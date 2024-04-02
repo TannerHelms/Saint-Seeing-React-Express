@@ -4,6 +4,7 @@ import {
   IonButton,
   IonButtons,
   IonContent,
+  IonFooter,
   IonHeader,
   IonPage,
   IonTitle,
@@ -11,7 +12,7 @@ import {
   useIonRouter,
 } from "@ionic/react";
 
-const Header = ({ title, back = false, children, icon, onClick }) => {
+const Header = ({ title, back = false, children, icon, onClick, footer }) => {
   const navigate = useIonRouter();
 
   return (
@@ -33,6 +34,7 @@ const Header = ({ title, back = false, children, icon, onClick }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>{children}</IonContent>
+      {footer && <IonFooter>{footer}</IonFooter>}
     </IonPage>
   );
 };

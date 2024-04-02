@@ -11,8 +11,28 @@ export const buildConversationsController = (repository: ConversationsRepository
     router.get("/", authMiddleware, async (req, res) => {
         try {
             const conversations = await repository.getByUserId(req.user!!.id);
-            conversations.sort((a, b) => b.lastMessageAt.getTime() - a.lastMessageAt.getTime());
             res.json({ conversations });
+        } catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).json({ error: "Conversation has already been created" });
+        }
+    });
+
+    // Get a conversation by its id
+    router.get("/:id", authMiddleware, async (req, res) => {
+        try {
+            const conversation = await repository.getById(req.user!!.id, parseInt(req.params.id));
+            res.json({ conversation });
+        } catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).json({ error: "Conversation not found" });
+        }
+    });
+
+    // Create a conversation between two users 
+    router.post("/", authMiddleware, async (req, res) => {
+        const { profile1Id, profile2Id } = req.body;
+        try {
+            const conversation = await repository.create(profile1Id, profile2Id);
+            res.json({ conversation });
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Conversation has already been created" });
         }

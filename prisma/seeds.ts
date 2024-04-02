@@ -34,6 +34,30 @@ async function main() {
     }
   })
 
+  await prisma.user.upsert({
+    where: {
+      email: "user@gmail.com",
+    },
+    create: {
+      firstName: "SITE",
+      lastName: "USER",
+      email: "user@gmail.com",
+      password_hash: bcrypt.hashSync('user'),
+      profile: {
+        create: {
+          backgroundImage: faker.image.url(),
+          profileImage: faker.image.avatar(),
+          city: faker.location.city(),
+          bio: faker.lorem.paragraph(),
+        }
+      }
+    },
+    update: {
+      email: "user@gmail.com",
+      password_hash: bcrypt.hashSync('user'),
+    }
+  })
+
   await CreateUsers(prisma, 10);
   await CreateRandomRequests(prisma, 10);
   await CreateConversations(prisma, 10);

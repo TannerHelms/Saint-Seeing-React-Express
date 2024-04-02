@@ -1,11 +1,22 @@
-import { useParams } from "react-router";
-
+import { Redirect, useParams } from "react-router";
+import useConversations from "../../api.js/use_conversations";
+import MessageDetailContainer from "../../components/message_detail_container";
+import Header from "../../components/ui/header";
+import SendMessage from "../../components/ui/send_message";
+import useNavBar from "../../hooks/use_navbar";
 const MessageDetail = () => {
+  useNavBar(false);
   const id = useParams().id;
+  const { conversation } = useConversations(parseInt(id));
+
+  if (conversation.isLoading) return null;
+
+  if (conversation.error) return <Redirect to="/login" />;
+
   return (
-    <div>
-      <p>Details for messages {id}</p>
-    </div>
+    <Header title={`Message ${id}`} back={true} footer={<SendMessage />}>
+      <MessageDetailContainer conversation={conversation.data} />
+    </Header>
   );
 };
 

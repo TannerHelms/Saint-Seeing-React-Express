@@ -35,7 +35,7 @@ root.render(
         <MantineProvider theme={appTheme} withGlobalStyles withNormalizeCss>
           <App />
         </MantineProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-right" />
       </QueryClientProvider>
     </PersistGate>
   </Provider>

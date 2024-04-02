@@ -5,24 +5,25 @@ import { useDispatch } from "react-redux";
 import { turnOffNavbar, turnOnNavbar } from "../store/navbar_slice";
 import { chat, off, profile } from "../store/menu_slice";
 
-const noNavbar = ["/requests_sent", "/requests_received"];
+const noNavbar = ["users", "requests_sent", "requests_received", "details"];
 
 const useNavbar = () => {
     const { me } = useUsers();
     const location = useLocation();
+    const path = location.pathname.split("/")[1];
     const dispatch = useDispatch();
     useEffect(() => {
         if (me.data) {
-            noNavbar.includes(location.pathname) ? dispatch(turnOffNavbar()) : dispatch(turnOnNavbar())
+            noNavbar.includes(path) ? dispatch(turnOffNavbar()) : dispatch(turnOnNavbar())
         } else {
             dispatch(turnOffNavbar());
         }
     }, [me])
 
     useEffect(() => {
-        if (location.pathname === "/messages") {
+        if (path === "messages") {
             dispatch(chat())
-        } else if (location.pathname === "/profile") {
+        } else if (path === "profile") {
             dispatch(profile())
         } else {
             dispatch(off())

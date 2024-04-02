@@ -41,7 +41,5 @@ export async function CreateUsers(prisma: PrismaClient, numUsers: number) {
                 },
             },
         });
-
-        console.log(`Created user with id: ${user.id}`);
     }
 }

@@ -1,14 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useApi from "../hooks/use_api";
 import { flattenObject } from "../utils/flatten";
 import timeAgo from "../utils/time_ago";
 
-const useConversations = () => {
+const useConversations = (id) => {
     const api = useApi();
+    const queryClient = useQueryClient();
 
-    const get = async () => {
+    const all = async () => {
         const { conversations } = await api.get("/conversations");
-        return conversations.map((c) => {
+        const convos = conversations.map((c) => {
             const flatten = flattenObject(c);
             const date = new Date(c.lastMessageAt)
             return {
@@ -16,14 +17,46 @@ const useConversations = () => {
                 lastMessageAt: timeAgo(date),
             };
         });
+
+        convos.forEach(c => {
+            const messages = c.messages.map(m => {
+                const date = new Date(m.createdAt);
+                return {
+                    ...m,
+                    createdAt: timeAgo(date),
+                };
+            });
+            queryClient.setQueryData(["conversation", c.id], {
+                ...c,
+                messages,
+            });
+        });
+
+        return convos;
     };
+
+    const get = async () => {
+        const { conversation } = await api.get(`/conversations/${id}`);
+        const flatten = flattenObject(conversation);
+        const date = new Date(conversation.lastMessageAt);
+        return {
+            ...flatten,
+            lastMessageAt: timeAgo(date),
+        };
+    }
 
     const conversations = useQuery({
         queryKey: ["conversations"],
-        queryFn: get,
+        queryFn: all,
     });
 
-    return { conversations }
+    const conversation = useQuery({
+        queryKey: ["conversation", id],
+        queryFn: get,
+        enabled: !!id,
+    })
+
+    return { conversation, conversations }
 }
 
 export default useConversations;

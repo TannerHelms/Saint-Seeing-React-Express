@@ -16,6 +16,17 @@ export class ConversationsRepository {
         return this.instance;
     }
 
+    create = async (profile1Id: number, profile2Id: number) => {
+        return await this.db.conversation.create({
+            data: {
+                profile1Id,
+                profile2Id,
+                lastMessage: "Chat Created",
+                lastMessageAt: new Date()
+            }
+        })
+    }
+
     getByUserId = async (userId: number) => {
         const conversations = await this.db.conversation.findMany({
             where: {
@@ -23,6 +34,16 @@ export class ConversationsRepository {
                     { profile1Id: userId },
                     { profile2Id: userId }
                 ]
+            },
+            orderBy: {
+                lastMessageAt: 'desc'
+            },
+            include: {
+                messages: {
+                    orderBy: {
+                        createdAt: 'asc'
+                    }
+                }
             }
         })
 
@@ -52,5 +73,29 @@ export class ConversationsRepository {
                 user
             }
         }))
+    }
+
+    getById = async (profile1Id: number, profile2Id: number) => {
+        const conversation = await this.db.conversation.findMany({
+            where: {
+                OR: [
+                    { profile1Id, profile2Id },
+                    { profile1Id: profile2Id, profile2Id: profile1Id }
+                ]
+            },
+            include: {
+                messages: {
+                    orderBy: {
+                        createdAt: 'asc'
+                    }
+                }
+            }
+        })
+
+        if (conversation.length == 0) {
+            throw new Error("Conversation not found")
+        }
+
+        return conversation[0];
     }
 }

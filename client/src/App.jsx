@@ -10,13 +10,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { chatbox, home, person } from "ionicons/icons";
-import {
-  Redirect,
-  Route,
-  useHistory,
-  useLocation,
-  useParams,
-} from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -39,11 +33,11 @@ import { useSelector } from "react-redux";
 import ChatMenu from "./components/menu/chat_menu";
 import ProfileMenu from "./components/menu/profile_menu";
 import LoginRoute from "./components/routes/login_route";
-import ProtectedRoute from "./components/routes/protected_route";
 import Home from "./pages/( HOME )/home";
 import Users from "./pages/( HOME )/users";
-import Messages from "./pages/( MESSAGES )/messages";
 import RequestsReceived from "./pages/( MESSAGES )/requests_received";
+import MessageDetail from "./pages/( MESSAGES )/message_detail";
+import Messages from "./pages/( MESSAGES )/messages";
 import RequestsSent from "./pages/( MESSAGES )/requests_sent";
 import Profile from "./pages/( PROFILE )/profile";
 import Login from "./pages/( SIGN_IN )/login";
@@ -52,15 +46,8 @@ import "./theme/variables.css";
 
 setupIonicReact();
 
-const Nav = ({ children }) => {
-  const location = useLocation();
-  console.log(location);
-  return children;
-};
-
 const App = () => {
   const navbar = useSelector(nav);
-  const location = useHistory();
 
   return (
     <IonApp>
@@ -76,6 +63,7 @@ const App = () => {
             <LoginRoute path="/login" component={Login} exact />
             <Route path="/home" component={Home} exact />
             <Route path="/messages" component={Messages} exact />
+            <Route path="/details/:id" component={MessageDetail} exact />
             <Route path="/profile" component={Profile} exact />
             <Route path="/users/:id" component={Users} />
             <Route path="/requests_sent" component={RequestsSent} />

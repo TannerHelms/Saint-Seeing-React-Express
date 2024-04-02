@@ -87,6 +87,8 @@ model Message {
   sender   Profile @relation("sender", fields: [senderId], references: [id])
   receiver Profile @relation("receiver", fields: [receiverId], references: [id])
 
-  conversationId Int
-  Conversation   Conversation? @relation(fields: [senderId, receiverId], references: [profile1Id, profile2Id])
+  profile1Id Int
+  profile2Id Int
+
+  conversation Conversation? @relation(fields: [profile1Id, profile2Id], references: [profile1Id, profile2Id])
 }

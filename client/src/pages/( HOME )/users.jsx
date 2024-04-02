@@ -4,7 +4,7 @@ import Header from "../../components/ui/header";
 import UsersTile from "../../components/users_container";
 const Users = () => {
   const id = useParams().id;
-  const { user } = useUsers(id);
+  const { user } = useUsers(parseInt(id));
 
   if (user.isLoading) return null;
 
