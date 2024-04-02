@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import useApi from "../hooks/use_api";
 import { token as tokenFn } from "../store/token_slice";
 import { flattenObject } from "../utils/flatten";
-import { turnOnNavbar } from "../store/navbar_slice";
 
 const useUsers = (id) => {
     const api = useApi();
     const queryClient = useQueryClient();
     const token = useSelector(tokenFn)
-    const dispatch = useDispatch();
 
     // GET ME
     const getMe = async () => {

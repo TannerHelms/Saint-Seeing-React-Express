@@ -1,7 +1,6 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import useApi from "../hooks/use_api"
+import { useQuery } from "@tanstack/react-query";
+import useApi from "../hooks/use_api";
 import { flattenObject } from "../utils/flatten";
-import sortRequests from "../utils/sort_requests";
 import timeAgo from "../utils/time_ago";
 
 const useRequests = () => {

@@ -14,7 +14,11 @@ const MessageDetail = () => {
   if (conversation.error) return <Redirect to="/login" />;
 
   return (
-    <Header title={`Message ${id}`} back={true} footer={<SendMessage />}>
+    <Header
+      title={`Message ${id}`}
+      back={true}
+      footer={<SendMessage conversation={conversation} />}
+    >
       <MessageDetailContainer conversation={conversation.data} />
     </Header>
   );
