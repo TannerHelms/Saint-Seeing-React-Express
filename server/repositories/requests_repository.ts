@@ -26,6 +26,26 @@ export class RequestsRepository {
         })
     }
 
+    getByUser = async (fromId: number, toId: number) => {
+        const from = await this.db.request.findUnique({
+            where: {
+                fromId_toId: {
+                    fromId,
+                    toId
+                }
+            }
+        })
+        const to = this.db.request.findUnique({
+            where: {
+                fromId_toId: {
+                    fromId: toId,
+                    toId: fromId
+                }
+            }
+        })
+        return from || to
+    }
+
     del(from: number, to: number) {
         return this.db.request.delete({
             where: {

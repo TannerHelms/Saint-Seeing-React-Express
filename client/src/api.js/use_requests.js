@@ -3,9 +3,9 @@ import useApi from "../hooks/use_api";
 import { flattenObject } from "../utils/flatten";
 import timeAgo from "../utils/time_ago";
 
-const useRequests = () => {
+const useRequests = (id) => {
     const api = useApi();
-    const get = async () => {
+    const all = async () => {
         let { sent, received } = await api.get("/requests");
 
         sent = sent.map((req) => {
@@ -32,13 +32,22 @@ const useRequests = () => {
 
     const requests = useQuery({
         queryKey: ["requests"],
-        queryFn: get,
+        queryFn: all,
     });
 
     const cancel = (id) => api.del(`/requests/${id}`)
 
 
     const accept = (id) => api.del(`/requests/accept/${id}`)
+
+    const create = ({ fromId, toId }) => api.post("/requests", { fromId, toId })
+
+    const get = async () => (await api.get(`/requests/${id}`)).request
+
+    const request = useQuery({
+        queryKey: ["request", id],
+        queryFn: get,
+    })
 
 
     const cancelMutation = useMutation({
@@ -57,7 +66,17 @@ const useRequests = () => {
         }
     })
 
-    return { requests, accept: acceptMutation, cancel: cancelMutation };
+    const createMutation = useMutation({
+        queryKey: ["requests"],
+        mutationFn: create,
+        onSettled: () => {
+            requests.refetch()
+            request.refetch()
+        }
+
+    })
+
+    return { requests, accept: acceptMutation, cancel: cancelMutation, create: createMutation, request };
 
 }
 

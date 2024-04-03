@@ -18,6 +18,18 @@ export const buildRequestsController = (repository: RequestsRepository) => {
         }
     });
 
+    // Get a request between 2 users
+    router.get("/:id", authMiddleware, async (req, res) => {
+        try {
+            const request = await repository.getByUser(req.user!!.id, parseInt(req.params.id));
+            console.log(request)
+            res.json({ request });
+        } catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
+        }
+    });
+
+
     // Get all the requests that a user has sent and received
     router.get("/", authMiddleware, async (req, res) => {
         try {
