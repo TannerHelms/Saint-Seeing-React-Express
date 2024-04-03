@@ -12,9 +12,15 @@ import {
   useIonRouter,
 } from "@ionic/react";
 
-const Header = ({ title, back = false, children, icon, onClick, footer }) => {
-  const navigate = useIonRouter();
-
+const Header = ({
+  title,
+  back = false,
+  children,
+  icon,
+  onClick,
+  footer,
+  href,
+}) => {
   return (
     <IonPage>
       <IonHeader>
@@ -22,7 +28,7 @@ const Header = ({ title, back = false, children, icon, onClick, footer }) => {
           <IonTitle>{title}</IonTitle>
           {back && (
             <IonButtons className="float-start">
-              <IonBackButton defaultHref="/home"></IonBackButton>
+              <IonBackButton defaultHref={href || "/home"}></IonBackButton>
             </IonButtons>
           )}
 

@@ -15,9 +15,10 @@ const MessageDetail = () => {
 
   return (
     <Header
-      title={`Message ${id}`}
+      title={`${conversation.data.firstName} ${conversation.data.lastName}`}
       back={true}
       footer={<SendMessage conversation={conversation} />}
+      href={"/messages"}
     >
       <MessageDetailContainer conversation={conversation.data} />
     </Header>
