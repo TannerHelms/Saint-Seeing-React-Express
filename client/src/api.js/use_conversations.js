@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useApi from "../hooks/use_api";
 import { flattenObject } from "../utils/flatten";
 import timeAgo from "../utils/time_ago";
@@ -45,6 +45,16 @@ const useConversations = (id) => {
         };
     }
 
+    const create = ({ profile1Id, profile2Id }) => api.post("/conversations", { profile1Id, profile2Id });
+
+    const createMutation = useMutation({
+        queryKey: ["conversations"],
+        mutationFn: create,
+        onSettled: () => {
+            queryClient.invalidateQueries("conversations");
+        },
+    });
+
     const conversations = useQuery({
         queryKey: ["conversations"],
         queryFn: all,
@@ -56,7 +66,7 @@ const useConversations = (id) => {
         enabled: !!id,
     })
 
-    return { conversation, conversations }
+    return { conversation, conversations, create: createMutation }
 }
 
 export default useConversations;

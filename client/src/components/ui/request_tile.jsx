@@ -2,15 +2,20 @@ import { Avatar, Button, Divider } from "@mantine/core";
 import React from "react";
 import useRequests from "../../api.js/use_requests";
 import useConversations from "../../api.js/use_conversations";
+import useUsers from "../../api.js/use_users";
 const RequestTile = ({ request, sent }) => {
+  const { me } = useUsers();
   const { cancel, accept } = useRequests();
-  // const { create } = useConversations();
+  const { create } = useConversations();
 
   const handleRequest = async () => {
     if (sent === true) cancel.mutateAsync(request.id);
     if (sent === false) {
       await accept.mutateAsync(request.id);
-      // create.mutateAsync(request.fromId);
+      create.mutateAsync({
+        profile1Id: me.data.id,
+        profile2Id: request.fromId,
+      });
     }
   };
   return (

@@ -59,8 +59,8 @@ async function main() {
   })
 
   await CreateUsers(prisma, 10);
-  await CreateRandomRequests(prisma, 10);
   await CreateConversations(prisma, 10);
+  await CreateRandomRequests(prisma, 10);
 }
 
 main()

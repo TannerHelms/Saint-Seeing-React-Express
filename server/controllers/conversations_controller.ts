@@ -30,6 +30,7 @@ export const buildConversationsController = (repository: ConversationsRepository
     // Create a conversation between two users 
     router.post("/", authMiddleware, async (req, res) => {
         const { profile1Id, profile2Id } = req.body;
+        console.log(profile1Id, profile2Id)
         try {
             const conversation = await repository.create(profile1Id, profile2Id);
             res.json({ conversation });
