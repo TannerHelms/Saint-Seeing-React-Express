@@ -26,6 +26,17 @@ export class RequestsRepository {
         })
     }
 
+    del(from: number, to: number) {
+        return this.db.request.delete({
+            where: {
+                fromId_toId: {
+                    fromId: from,
+                    toId: to
+                }
+            }
+        })
+    }
+
     getByUserId = async (userId: number) => {
         const requests = await {
             sent: await this.db.request.findMany({
@@ -71,6 +82,8 @@ export class RequestsRepository {
                 user
             }
         }))
+
+
 
         return { sent, received }
     }

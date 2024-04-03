@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useApi from "../hooks/use_api";
 import { flattenObject } from "../utils/flatten";
 import timeAgo from "../utils/time_ago";
@@ -35,7 +35,29 @@ const useRequests = () => {
         queryFn: get,
     });
 
-    return { requests };
+    const cancel = (id) => api.del(`/requests/${id}`)
+
+
+    const accept = (id) => api.del(`/requests/accept/${id}`)
+
+
+    const cancelMutation = useMutation({
+        queryKey: ["requests"],
+        mutationFn: cancel,
+        onSettled: () => {
+            requests.refetch()
+        }
+    })
+
+    const acceptMutation = useMutation({
+        queryKey: ["requests"],
+        mutationFn: accept,
+        onSettled: () => {
+            requests.refetch()
+        }
+    })
+
+    return { requests, accept: acceptMutation, cancel: cancelMutation };
 
 }
 

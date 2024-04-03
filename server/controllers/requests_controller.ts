@@ -7,6 +7,8 @@ import { RequestsRepository } from "../repositories/requests_repository";
 export const buildRequestsController = (repository: RequestsRepository) => {
     const router = Router();
 
+
+    // Create a request between two users
     router.post("/", authMiddleware, async (req, res) => {
         try {
             const conversationRequest = await repository.createRequest(req.body.fromId, req.body.toId);
@@ -16,6 +18,7 @@ export const buildRequestsController = (repository: RequestsRepository) => {
         }
     });
 
+    // Get all the requests that a user has sent and received
     router.get("/", authMiddleware, async (req, res) => {
         try {
             let { sent, received } = await repository.getByUserId(req.user!!.profileId);
@@ -24,6 +27,28 @@ export const buildRequestsController = (repository: RequestsRepository) => {
             res.json({ sent, received });
         }
         catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
+        }
+    });
+
+    // Cancel a request
+    router.delete("/:id", authMiddleware, async (req, res) => {
+        try {
+            const id = req.params.id;
+            await repository.del(req.user!!.id, parseInt(id));
+            res.json({ message: "Request has been cancelled" });
+        } catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
+        }
+    });
+
+    // accept a request
+    router.delete("/accept/:id", authMiddleware, async (req, res) => {
+        try {
+            const id = req.params.id;
+            await repository.del(parseInt(id), req.user!!.id,);
+            res.json({ message: "Request has been cancelled" });
+        } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
         }
     });
