@@ -6,6 +6,10 @@ export type CreateUserPayload = {
   password: string,
   firstName: string,
   lastName: string,
+  profileImage: string,
+  backgroundImage: string,
+  bio: string,
+  rules: string[],
 }
 
 export class UsersRepository {
@@ -23,7 +27,7 @@ export class UsersRepository {
   }
 
 
-  async createUser({ email, password, firstName, lastName }: CreateUserPayload) {
+  async createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules }: CreateUserPayload) {
     return this.db.user.create({
       data: {
         email: email,
@@ -31,7 +35,12 @@ export class UsersRepository {
         firstName: firstName,
         lastName: lastName,
         profile: {
-          create: {}
+          create: {
+            backgroundImage: backgroundImage,
+            profileImage: profileImage,
+            bio: bio,
+            rules: rules,
+          }
         }
       }
     });

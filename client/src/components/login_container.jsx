@@ -1,4 +1,4 @@
-import { IonButton } from "@ionic/react";
+import { IonButton, IonTabButton } from "@ionic/react";
 import { PasswordInput, TextInput, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
@@ -51,6 +51,12 @@ const LoginScreen = (props) => {
             Login
           </IonButton>
         </form>
+        <div className="flex gap-2 items-center">
+          <p>Don't have account?</p>
+          <IonTabButton className="text-blue-600 text-lg" href="/sign_up">
+            Sign Up
+          </IonTabButton>
+        </div>
       </div>
     </div>
   );

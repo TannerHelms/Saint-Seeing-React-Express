@@ -43,6 +43,7 @@ import Profile from "./pages/( PROFILE )/profile";
 import Login from "./pages/( SIGN_IN )/login";
 import { nav } from "./store/navbar_slice";
 import "./theme/variables.css";
+import SignUp from "./pages/( SIGN_IN )/sign_up";
 
 setupIonicReact();
 
@@ -61,6 +62,7 @@ const App = () => {
             {/* <Nav> */}
             <Route path="/" render={() => <Redirect to="/home" />} exact />
             <LoginRoute path="/login" component={Login} exact />
+            <LoginRoute path="/sign_up" component={SignUp} exact />
             <Route path="/home" component={Home} exact />
             <Route path="/messages" component={Messages} exact />
             <Route path="/details/:id" component={MessageDetail} exact />

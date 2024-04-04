@@ -2,6 +2,7 @@ import { Router } from "express";
 import jwt from "jsonwebtoken";
 import { authMiddleware } from "../middleware/authentication";
 import { UsersRepository } from "../repositories/users_respository";
+import { StatusCodes } from "http-status-codes";
 
 export const buildUsersController = (usersRepository: UsersRepository): Router => {
   const router = Router();
@@ -13,13 +14,17 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
   });
 
   // Create a user
-  router.post("/", authMiddleware, async (req, res) => {
-    const user = await usersRepository.createUser(req.body);
-    const token = jwt.sign({
-      userId: user.id,
-    }, process.env.ENCRYPTION_KEY as string);
+  router.post("/", async (req, res) => {
+    try {
+      const user = await usersRepository.createUser(req.body);
+      const token = jwt.sign({
+        userId: user.id,
+      }, process.env.ENCRYPTION_KEY as string);
 
-    res.json({ user, token });
+      res.json({ user, token });
+    } catch (error) {
+      res.status(StatusCodes.BAD_REQUEST).json({ error: "Email already in use" });
+    }
   });
 
   // Get current user
