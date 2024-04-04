@@ -6,6 +6,11 @@ const RequestsSentContainer = ({ requests }) => {
       {requests.sent.map((request, idx) => (
         <RequestTile key={idx} request={request} sent={true} />
       ))}
+      {requests.sent && requests.sent.length === 0 && (
+        <p className="text-center text-sm ">
+          You currently dont have any pending chat requests
+        </p>
+      )}
     </div>
   );
 };

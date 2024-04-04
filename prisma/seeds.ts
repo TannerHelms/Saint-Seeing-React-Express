@@ -42,7 +42,7 @@ async function main() {
       firstName: "SITE",
       lastName: "USER",
       email: "user@gmail.com",
-      password_hash: bcrypt.hashSync('user'),
+      password_hash: bcrypt.hashSync('user123'),
       profile: {
         create: {
           backgroundImage: faker.image.url(),
@@ -59,8 +59,8 @@ async function main() {
   })
 
   await CreateUsers(prisma, 10);
-  await CreateConversations(prisma, 10);
-  await CreateRandomRequests(prisma, 10);
+  // await CreateConversations(prisma, 10);
+  // await CreateRandomRequests(prisma, 10);
 }
 
 main()

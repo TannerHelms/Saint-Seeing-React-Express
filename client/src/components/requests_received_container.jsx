@@ -6,6 +6,11 @@ const RequestsReceivedContainer = ({ requests }) => {
       {requests.received.map((request, idx) => (
         <RequestTile key={idx} request={request} sent={false} />
       ))}
+      {requests.received.length === 0 && (
+        <p className="text-center text-sm ">
+          You currently dont have any chat requests
+        </p>
+      )}
     </div>
   );
 };
