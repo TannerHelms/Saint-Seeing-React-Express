@@ -47,6 +47,7 @@ const useRequests = (id) => {
     const request = useQuery({
         queryKey: ["request", id],
         queryFn: get,
+        enabled: !!id
     })
 
 

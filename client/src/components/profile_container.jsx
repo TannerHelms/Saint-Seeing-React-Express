@@ -5,11 +5,15 @@ import UserProfile from "./user/user_profile";
 import Banner from "./user/banner";
 const ProfileContainer = ({ user }) => {
   return (
-    <div className="middle">
-      <Banner user={user} />
-      <UserDetails user={user} />
-      <Space h="lg" />
-      <UserProfile user={user} />
+    <div className="middle h-full color-background">
+      <div className="color-secondary">
+        <Banner user={user} />
+        <UserDetails user={user} friends={true} />
+        <Space h="lg" />
+      </div>
+      <div className="color-secondary">
+        <UserProfile user={user} />
+      </div>
     </div>
   );
 };

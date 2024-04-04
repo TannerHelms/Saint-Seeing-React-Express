@@ -8,11 +8,13 @@ const timeAgo = (lastMessageTime) => {
     }
 
     const timeDifference = currentTime - messageTime;
-    const seconds = Math.floor(timeDifference / 1000);
+    let seconds = Math.floor(timeDifference / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
     const months = Math.floor(days / 30);
+
+    if (seconds < 0) seconds = 0;
 
     if (months > 0) {
         return `${months} month${months > 1 ? "s" : ""} ago`;

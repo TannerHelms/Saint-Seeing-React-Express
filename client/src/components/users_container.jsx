@@ -16,8 +16,6 @@ const UsersTile = ({ user }) => {
   const { conversation } = useConversations(parseInt(id));
   const { create, request } = useRequests(parseInt(id));
 
-  console.log(request);
-
   if (request.isLoading) return null;
 
   const handleChatRequest = () => {
@@ -25,26 +23,33 @@ const UsersTile = ({ user }) => {
   };
 
   return (
-    <div className="middle">
-      <Banner user={user} />
-      <div className="text-center mb-2">
-        {request.data?.fromId == me.data.id && (
-          <p>Your chat request is pending</p>
+    <div className="middle color-background h-body2">
+      <div className="color-secondary">
+        <Banner user={user} />
+        <div className="text-center mb-2">
+          {request.data?.toId == me.data.id && (
+            <p>This user has sent you a chat request!</p>
+          )}
+          {request.data?.fromId == me.data.id && (
+            <p>Your chat request is pending</p>
+          )}
+        </div>
+        <div className="text-center mb-2">
+          {conversation.data && <p>You are currently friends!</p>}
+        </div>
+        <UserDetails user={user} friends={true} />
+        <Space h="lg" />
+      </div>
+      <div className="color-secondary">
+        <UserProfile user={user} />
+        {!request.data && !conversation.data && (
+          <IonFab vertical="bottom" horizontal="end" slot="fixed">
+            <IonButton color={"tertiary"} onClick={handleChatRequest}>
+              <IonIcon icon={chatbubbleOutline} size="large" />
+            </IonButton>
+          </IonFab>
         )}
       </div>
-      <div className="text-center mb-2">
-        {conversation.data && <p>You are currently friends!</p>}
-      </div>
-      <UserDetails user={user} friends={true} />
-      <Space h="lg" />
-      <UserProfile user={user} />
-      {!request.data && !conversation.data && (
-        <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonButton color={"tertiary"} onClick={handleChatRequest}>
-            <IonIcon icon={chatbubbleOutline} size="large" />
-          </IonButton>
-        </IonFab>
-      )}
     </div>
   );
 };

@@ -9,7 +9,7 @@ const useLogout = () => {
     const logout = () => {
         dispatch(turnOffNavbar());
         dispatch(clearToken());
-        queryClient.removeQueries();
+        queryClient.clear();
     }
     return { logout }
 }

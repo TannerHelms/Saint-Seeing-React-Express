@@ -17,6 +17,16 @@ export const buildConversationsController = (repository: ConversationsRepository
         }
     });
 
+    // Get all the conversation that a user is in
+    router.get("/count/:id", authMiddleware, async (req, res) => {
+        try {
+            const conversations = await repository.getByUserId(parseInt(req.params.id));
+            res.json({ count: conversations.length });
+        } catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).json({ error: "Could not find the users conversations" });
+        }
+    });
+
     // Get a conversation by its id
     router.get("/:id", authMiddleware, async (req, res) => {
         try {
@@ -30,7 +40,6 @@ export const buildConversationsController = (repository: ConversationsRepository
     // Create a conversation between two users 
     router.post("/", authMiddleware, async (req, res) => {
         const { profile1Id, profile2Id } = req.body;
-        console.log(profile1Id, profile2Id)
         try {
             const conversation = await repository.create(profile1Id, profile2Id);
             res.json({ conversation });

@@ -47,6 +47,8 @@ const useConversations = (id) => {
 
     const create = ({ profile1Id, profile2Id }) => api.post("/conversations", { profile1Id, profile2Id });
 
+    const count = async () => (await api.get(`/conversations/count/${id}`)).count;
+
     const createMutation = useMutation({
         queryKey: ["conversations"],
         mutationFn: create,
@@ -66,7 +68,13 @@ const useConversations = (id) => {
         enabled: !!id,
     })
 
-    return { conversation, conversations, create: createMutation }
+    const countQuery = useQuery({
+        queryKey: ["count", id],
+        queryFn: count,
+        enabled: !!id,
+    })
+
+    return { count: countQuery, conversation, conversations, create: createMutation }
 }
 
 export default useConversations;
