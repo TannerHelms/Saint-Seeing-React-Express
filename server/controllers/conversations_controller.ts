@@ -30,7 +30,6 @@ export const buildConversationsController = (repository: ConversationsRepository
     // Get a conversation by its id
     router.get("/:id", authMiddleware, async (req, res) => {
         try {
-            console.log(req.user!!.id, parseInt(req.params.id));
             const conversation = await repository.getById(req.user!!.id, parseInt(req.params.id));
             res.json({ conversation });
         } catch (error) {

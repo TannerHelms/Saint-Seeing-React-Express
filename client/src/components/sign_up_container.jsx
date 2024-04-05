@@ -17,6 +17,7 @@ const schema = z.object({
 const SignUpContainer = (props) => {
   const { signup } = useSignUp();
   const [backgroundImage, setBackgroundImage] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
 
   const form = useForm({
     initialValues: {
@@ -35,20 +36,17 @@ const SignUpContainer = (props) => {
   }
 
   const handleSubmit = async (e) => {
-    signup.mutateAsync({
-      ...e,
-      backgroundImage: backgroundImage,
-    });
-  };
-  const handleFile = (file) => {
-    setBackgroundImage(file);
+    signup.mutateAsync({ data: e, backgroundImage, profileImage });
   };
 
   return (
     <div {...props}>
       <div className="col w-full">
         <Title>Sign Up</Title>
-        <SignUpBanner file={handleFile} />
+        <SignUpBanner
+          background={setBackgroundImage}
+          profile={setProfileImage}
+        />
         <form onSubmit={form.onSubmit(handleSubmit)} className="col w-full">
           <p className="text-center text-red-600">
             {signup?.error && signup.error?.response?.data?.error}

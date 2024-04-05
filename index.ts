@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import { engine } from 'express-handlebars';
 import fs from "fs";
+import path from "path";
 import { buildConversationsController } from "./server/controllers/conversations_controller";
 import { buildHomeController } from "./server/controllers/home_controller";
 import { buildMessagesController } from "./server/controllers/messages_controller";
@@ -47,11 +48,14 @@ if (!DEBUG) {
   app.use(express.static('static'));
 } else {
   app.use((req, res, next) => {
-    if (req.url.includes(".")) {
+    if (req.url.includes("assets")) {
+      res.sendFile(path.join(__dirname, req.url).replace("%20", " "));
+    } else if (req.url.includes(".")) {
       res.redirect(`${process.env.ASSET_URL}/${req.url}`)
     } else {
       next();
     }
+
   });
 }
 

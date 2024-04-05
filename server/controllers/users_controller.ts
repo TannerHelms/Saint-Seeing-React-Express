@@ -18,13 +18,19 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
   router.post("/", async (req, res) => {
     try {
       const background = Array.isArray(req.files?.background) ? req.files.background[0] : req.files?.background;
-      const filePath = `./assets/background/${Date.now()}-${background!!.name}`
+      const profile = Array.isArray(req.files?.profile) ? req.files.profile[0] : req.files?.profile;
+      const backgroundPath = `/assets/background/${Date.now()}-${background!!.name}`
+      const profilePath = `/assets/avatar/${Date.now()}-${profile!!.name}`
       if (background) {
-        background.mv(filePath);
+        background.mv("." + backgroundPath);
+      }
+      if (profile) {
+        profile.mv("." + profilePath);
       }
       const user = await usersRepository.createUser({
         ...req.body,
-        backgroundImage: filePath,
+        backgroundImage: process.env.SERVER_URL + backgroundPath,
+        profileImage: process.env.SERVER_URL + profilePath,
         rules: [],
       });
       const token = jwt.sign({

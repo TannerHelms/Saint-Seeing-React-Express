@@ -1,16 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
-import useInit from "./use_init";
 import axios from "axios";
 
 const useSignUp = () => {
-    const { api, dispatch } = useInit();
 
-    const signup = (data) => {
+    const signup = ({ data, backgroundImage, profileImage }) => {
         const fd = new FormData();
-        fd.append('background', data.backgroundImage, data.backgroundImage.name);
         for (const key in data) {
             fd.append(key, data[key]);
         }
+
+        fd.append("background", backgroundImage, backgroundImage.name);
+        fd.append("profile", profileImage, profileImage.name);
+
         return axios.post("http://localhost:3000/users", fd, {
             headers: {
                 'content-type': 'multipart/form-data'
