@@ -4,6 +4,8 @@ import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import useSignUp from "../hooks/use_sign_up";
 import { Redirect } from "react-router";
+import SignUpBanner from "./user/sign_up_banner";
+import { useState } from "react";
 const schema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Must be at least 6 characters"),
@@ -14,6 +16,7 @@ const schema = z.object({
 
 const SignUpContainer = (props) => {
   const { signup } = useSignUp();
+  const [backgroundImage, setBackgroundImage] = useState(null);
 
   const form = useForm({
     initialValues: {
@@ -21,8 +24,6 @@ const SignUpContainer = (props) => {
       password: "",
       firstName: "",
       lastName: "",
-      profileImage: "",
-      backgrondImage: "",
       bio: "",
       rules: [],
     },
@@ -34,16 +35,23 @@ const SignUpContainer = (props) => {
   }
 
   const handleSubmit = async (e) => {
-    signup.mutateAsync(e);
+    signup.mutateAsync({
+      ...e,
+      backgroundImage: backgroundImage,
+    });
+  };
+  const handleFile = (file) => {
+    setBackgroundImage(file);
   };
 
   return (
     <div {...props}>
       <div className="col w-full">
         <Title>Sign Up</Title>
+        <SignUpBanner file={handleFile} />
         <form onSubmit={form.onSubmit(handleSubmit)} className="col w-full">
           <p className="text-center text-red-600">
-            {signup?.error && signup.error.message}
+            {signup?.error && signup.error?.response?.data?.error}
           </p>
           <TextInput
             className="w-full br"

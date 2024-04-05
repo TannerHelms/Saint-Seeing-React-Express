@@ -11,7 +11,7 @@ const SignUp = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <SignUpContainer className="pos-center middle" />
+        <SignUpContainer className="max m-auto" />
       </IonContent>
     </IonPage>
   );

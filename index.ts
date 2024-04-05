@@ -1,23 +1,20 @@
+import { PrismaClient } from "@prisma/client";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
 import express from "express";
-import path from "path";
 import { engine } from 'express-handlebars';
 import fs from "fs";
-import dotenv from "dotenv";
-import bodyParser from "body-parser";
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { buildUsersController } from "./server/controllers/users_controller";
-import { buildSessionsController } from "./server/controllers/sessions_controller";
-import { buildHomeController } from "./server/controllers/home_controller";
-import { UsersRepository } from "./server/repositories/users_respository";
-import { RequestsRepository } from "./server/repositories/requests_repository";
-import { buildRequestsController } from "./server/controllers/requests_controller";
 import { buildConversationsController } from "./server/controllers/conversations_controller";
+import { buildHomeController } from "./server/controllers/home_controller";
+import { buildMessagesController } from "./server/controllers/messages_controller";
+import { buildRequestsController } from "./server/controllers/requests_controller";
+import { buildSessionsController } from "./server/controllers/sessions_controller";
+import { buildUsersController } from "./server/controllers/users_controller";
 import { ConversationsRepository } from "./server/repositories/conversations_repository";
 import { MessagesRepository } from "./server/repositories/messages_repository";
-import { buildMessagesController } from "./server/controllers/messages_controller";
-
+import { RequestsRepository } from "./server/repositories/requests_repository";
+import { UsersRepository } from "./server/repositories/users_respository";
+import fileUpload from "express-fileupload";
 
 
 const db = new PrismaClient();
@@ -38,6 +35,8 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 app.use(cors());
+app.use(fileUpload());
+
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`)
