@@ -1,0 +1,5 @@
+.vscode
+android
+node_modules
+ios
+.gitignore
