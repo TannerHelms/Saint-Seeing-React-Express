@@ -4,6 +4,7 @@ import useApi from "../hooks/use_api";
 import { token as tokenFn } from "../store/token_slice";
 import { flattenObject } from "../utils/flatten";
 
+
 const useUsers = (id) => {
     const api = useApi();
     const queryClient = useQueryClient();
@@ -23,12 +24,13 @@ const useUsers = (id) => {
 
     // CRUD FUNCATIONALITY
     const all = async () => {
+        if (!self) return null;
         const users = (await api.get('/users')).users;
-        return users.map((user) => {
+        return await Promise.all(users.map(async (user) => {
             const flat = flattenObject(user);
             queryClient.setQueryData(["user", user.id], flat);
             return flat;
-        });
+        }));
     };
 
     const get = async () => {

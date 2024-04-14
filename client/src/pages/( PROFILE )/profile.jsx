@@ -4,7 +4,7 @@ import { menu } from "ionicons/icons";
 import ProfileContainer from "../../components/profile_container";
 import Header from "../../components/ui/header";
 import useLogout from "../../hooks/use_logout";
-import useUsers from "../../api.js/use_users";
+import useUsers from "../../api/use_users";
 import { Redirect } from "react-router";
 import useNavbar from "../../hooks/use_navbar";
 

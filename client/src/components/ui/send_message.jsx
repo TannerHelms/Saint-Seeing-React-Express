@@ -1,7 +1,7 @@
 import { IonButton, IonIcon, IonInput, IonItem } from "@ionic/react";
 import { addCircleOutline, send, sendOutline } from "ionicons/icons";
 import React, { useState } from "react";
-import useMessage from "../../api.js/use_messages";
+import useMessage from "../../api/use_messages";
 const SendMessage = ({ conversation }) => {
   const { send } = useMessage(conversation.data);
   const [message, setMessage] = useState("");

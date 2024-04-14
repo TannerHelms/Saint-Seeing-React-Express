@@ -1,8 +1,8 @@
 import { Avatar, Button, Divider } from "@mantine/core";
 import React from "react";
-import useRequests from "../../api.js/use_requests";
-import useConversations from "../../api.js/use_conversations";
-import useUsers from "../../api.js/use_users";
+import useRequests from "../../api/use_requests";
+import useConversations from "../../api/use_conversations";
+import useUsers from "../../api/use_users";
 const RequestTile = ({ request, sent }) => {
   const { me } = useUsers();
   const { cancel, accept } = useRequests();

@@ -3,7 +3,7 @@ import { menu } from "ionicons/icons";
 import Header from "../../components/ui/header";
 
 import { menuController } from "@ionic/core/components";
-import useConversations from "../../api.js/use_conversations";
+import useConversations from "../../api/use_conversations";
 import ConversationsTile from "../../components/conversations_container";
 import { Redirect } from "react-router";
 import useNavbar from "../../hooks/use_navbar";

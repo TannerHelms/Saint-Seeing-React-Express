@@ -1,5 +1,5 @@
 import { Redirect } from "react-router";
-import useRequests from "../../api.js/use_requests";
+import useRequests from "../../api/use_requests";
 import RequestsReceivedContainer from "../../components/requests_received_container";
 import Header from "../../components/ui/header";
 

@@ -1,5 +1,5 @@
 import { Redirect, useParams } from "react-router";
-import useConversations from "../../api.js/use_conversations";
+import useConversations from "../../api/use_conversations";
 import MessageDetailContainer from "../../components/message_detail_container";
 import Header from "../../components/ui/header";
 import SendMessage from "../../components/ui/send_message";

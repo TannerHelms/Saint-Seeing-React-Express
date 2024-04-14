@@ -1,10 +1,9 @@
-import { IonIcon, useIonRouter } from "@ionic/react";
+import { IonIcon } from "@ionic/react";
 import React from "react";
 import { people } from "ionicons/icons";
-import useConversations from "../../api.js/use_conversations";
+import useConversations from "../../api/use_conversations";
 import { useLocation, useParams } from "react-router";
 const UserDetails = ({ user, friends = false }) => {
-  const path = useIonRouter().routeInfo.pathname.split("/")[1];
   const { count } = useConversations(user.id);
 
   if (count.isLoading) return null;
@@ -23,7 +22,7 @@ const UserDetails = ({ user, friends = false }) => {
             </>
           )}
         </div>
-        {!friends && <p>Location</p>}
+        {!friends && <p>{user.distance} mi</p>}
       </div>
       <div className="flex-between">
         <p>{user.city}</p>

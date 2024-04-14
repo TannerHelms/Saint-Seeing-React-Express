@@ -1,5 +1,5 @@
 import { useLocation, useParams } from "react-router";
-import useUsers from "../api.js/use_users";
+import useUsers from "../api/use_users";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { turnOffNavbar, turnOnNavbar } from "../store/navbar_slice";

@@ -1,7 +1,5 @@
-import { IonButton, IonIcon } from "@ionic/react";
 import { Space } from "@mantine/core";
-import { camera } from "ionicons/icons";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 const SignUpBanner = ({ background, profile }) => {
   const backgroundInput = useRef(null);
@@ -27,6 +25,7 @@ const SignUpBanner = ({ background, profile }) => {
         onChange={handleBackground}
         name="background"
         ref={backgroundInput}
+        accept="image/png, image/jpeg"
       />
       <input
         className="hidden"
@@ -34,6 +33,7 @@ const SignUpBanner = ({ background, profile }) => {
         onChange={handleProfile}
         name="profile"
         ref={profileInput}
+        accept="image/png, image/jpeg"
       />
       <div className="relative">
         {/* Background Image */}

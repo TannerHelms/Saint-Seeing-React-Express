@@ -1,5 +1,5 @@
 import { Redirect, Route } from "react-router";
-import useUsers from "../../api.js/use_users";
+import useUsers from "../../api/use_users";
 import useNavbar from "../../hooks/use_navbar";
 
 const ProtectedRoute = ({ component: Componet, path }) => {

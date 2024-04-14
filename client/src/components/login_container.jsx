@@ -37,7 +37,7 @@ const LoginScreen = (props) => {
           <p className="text-center text-red-600">{error && error.message}</p>
           <TextInput
             className="w-full br"
-            placeholder="you@mantine.dev"
+            placeholder="Your Email"
             required
             {...form.getInputProps("email")}
           />

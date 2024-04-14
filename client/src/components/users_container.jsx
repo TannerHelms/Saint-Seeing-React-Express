@@ -5,10 +5,10 @@ import UserDetails from "./user/user_details";
 import UserProfile from "./user/user_profile";
 import { IonButton, IonFab, IonIcon } from "@ionic/react";
 import { chatbox, chatbubbleOutline } from "ionicons/icons";
-import useRequests from "../api.js/use_requests";
-import useUsers from "../api.js/use_users";
+import useRequests from "../api/use_requests";
+import useUsers from "../api/use_users";
 import { useParams } from "react-router";
-import useConversations from "../api.js/use_conversations";
+import useConversations from "../api/use_conversations";
 
 const UsersTile = ({ user }) => {
   const id = useParams().id;

@@ -1,5 +1,5 @@
 import { Redirect, useParams } from "react-router";
-import useUsers from "../../api.js/use_users";
+import useUsers from "../../api/use_users";
 import Header from "../../components/ui/header";
 import UsersTile from "../../components/users_container";
 const Users = () => {

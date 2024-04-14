@@ -23,8 +23,10 @@ async function main() {
         create: {
           backgroundImage: faker.image.url(),
           profileImage: faker.image.avatar(),
-          city: faker.location.city(),
+          city: "Logan, Utah",
           bio: faker.lorem.paragraph(),
+          longitude: 41.7370,
+          latitude: -111.8338,
         }
       }
     },
@@ -47,8 +49,10 @@ async function main() {
         create: {
           backgroundImage: faker.image.url(),
           profileImage: faker.image.avatar(),
-          city: faker.location.city(),
+          city: "Logan, Utah",
           bio: faker.lorem.paragraph(),
+          longitude: 41.7370,
+          latitude: -111.8338,
         }
       }
     },
@@ -59,8 +63,8 @@ async function main() {
   })
 
   await CreateUsers(prisma, 10);
-  // await CreateConversations(prisma, 10);
-  // await CreateRandomRequests(prisma, 10);
+  await CreateConversations(prisma, 10);
+  await CreateRandomRequests(prisma, 10);
 }
 
 main()

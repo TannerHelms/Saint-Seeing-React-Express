@@ -3,14 +3,33 @@ import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 import { authMiddleware } from "../middleware/authentication";
 import { UsersRepository } from "../repositories/users_respository";
+import haversine from "haversine";
 
+// Define an interface for the user object
+interface User {
+  // Define properties of the user object
+  profile: {
+    latitude: number;
+    longitude: number;
+    // Add other properties of the profile if needed
+  };
+  // Add other properties of the user object if needed
+}
 
 export const buildUsersController = (usersRepository: UsersRepository): Router => {
   const router = Router();
-
   // Get all users
   router.get("/", authMiddleware, async (req, res) => {
-    const users = await usersRepository.getUsers();
+    let users = await usersRepository.getUsers();
+    const us = req.user as unknown as User;
+    users = users.map((user) => {
+      const p1 = { longitude: us.profile.longitude, latitude: us.profile.latitude };
+      const p2 = { longitude: user.profile.longitude!!, latitude: user.profile.latitude!! };
+      return {
+        ...user,
+        distance: haversine(p1, p2).toFixed(0)
+      }
+    });
     res.json({ users });
   });
 

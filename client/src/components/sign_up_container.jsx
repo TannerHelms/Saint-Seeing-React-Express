@@ -6,6 +6,7 @@ import useSignUp from "../hooks/use_sign_up";
 import { Redirect } from "react-router";
 import SignUpBanner from "./user/sign_up_banner";
 import { useState } from "react";
+import AsyncCity from "./ui/async_city";
 const schema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Must be at least 6 characters"),
@@ -53,7 +54,7 @@ const SignUpContainer = (props) => {
           </p>
           <TextInput
             className="w-full br"
-            placeholder="you@mantine.dev"
+            placeholder="Your Email"
             required
             {...form.getInputProps("email")}
           />
@@ -65,16 +66,17 @@ const SignUpContainer = (props) => {
           />
           <TextInput
             className="w-full br"
-            placeholder="jon"
+            placeholder="Your First Name"
             required
             {...form.getInputProps("firstName")}
           />
           <TextInput
             className="w-full br"
-            placeholder="doe"
+            placeholder="Your Last Name"
             required
             {...form.getInputProps("lastName")}
           />
+          <AsyncCity />
           <TextInput
             className="w-full br"
             placeholder="Your Bio"

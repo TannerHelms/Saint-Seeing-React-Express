@@ -11,6 +11,7 @@ import App from "./App";
 import "./index.css";
 import { persistor, store } from "./store/store";
 import appTheme from "./theme.js";
+import "./api/radar";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

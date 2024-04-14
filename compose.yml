@@ -17,26 +17,26 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-  app:
-    build:
-      context: ./client/dist/
-      dockerfile: ./Dockerfile
-    container_name: "client"
-    ports: 
-      - 8100:8100
-    develop: 
-      watch: 
-      - action: rebuild
-      - path: .
-  api:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    container_name: "server"
-    develop: 
-      watch: 
-      - action: rebuild
-      - path: .
-    ports: 
-      - 3000:3000
+  # app:
+  #   build:
+  #     context: ./client/dist/
+  #     dockerfile: ./Dockerfile
+  #   container_name: "client"
+  #   ports: 
+  #     - 8100:8100
+  #   develop: 
+  #     watch: 
+  #     - action: rebuild
+  #     - path: .
+  # api:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./Dockerfile
+  #   container_name: "server"
+  #   develop: 
+  #     watch: 
+  #     - action: rebuild
+  #     - path: .
+  #   ports: 
+  #     - 3000:3000
   

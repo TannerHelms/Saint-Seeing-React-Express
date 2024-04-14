@@ -2,10 +2,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useApi from "../hooks/use_api";
 import { flattenObject } from "../utils/flatten";
 import timeAgo from "../utils/time_ago";
-
+import { token } from "../store/token_slice";
+import { useSelector } from "react-redux";
 const useConversations = (id) => {
     const api = useApi();
     const queryClient = useQueryClient();
+    const tk = useSelector(token);
 
     const all = async () => {
         const { conversations } = await api.get("/conversations");
@@ -60,6 +62,7 @@ const useConversations = (id) => {
     const conversations = useQuery({
         queryKey: ["conversations"],
         queryFn: all,
+        enabled: !!tk.value,
     });
 
     const conversation = useQuery({

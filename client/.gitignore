@@ -29,7 +29,7 @@ yarn-error.log*
 .eslintcache
 
 .idea/
-dist/
+# dist/
 types/
 .sourcemaps
 xcuserdata/

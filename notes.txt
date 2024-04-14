@@ -1,0 +1,5 @@
+Used to start the app:
+
+ionic capacitor run android -l --external
+
+scp -r root@77.37.67.62:~/my-node-app.tar my-node-app.tar
