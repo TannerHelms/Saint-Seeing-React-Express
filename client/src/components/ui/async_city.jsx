@@ -1,9 +1,8 @@
 import { useState, useRef } from "react";
 import { Autocomplete, Loader } from "@mantine/core";
 import RadarApi from "../../api/radarApi";
-import useUsers from "../../api/use_users";
 
-const AsyncCity = () => {
+const AsyncCity = ({ form }) => {
   const timeoutRef = useRef(-1);
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,15 +23,22 @@ const AsyncCity = () => {
           longitude: -111.8338,
           latitude: 41.73698,
         });
-        setData(addresses.map((a) => a.formattedAddress));
+        const formatted = addresses.map((a) => a.formattedAddress);
+        const uniqueFormatted = [...new Set(formatted)];
+        setData(uniqueFormatted);
         setLoading(false);
       }, 500);
     }
   };
+
   return (
     <Autocomplete
+      required
       value={value}
       data={data}
+      onOptionSubmit={(val) => {
+        form.setFieldValue("city", val);
+      }}
       onChange={handleChange}
       rightSection={loading ? <Loader size="1rem" /> : null}
       placeholder="Your City"

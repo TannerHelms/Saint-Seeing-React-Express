@@ -10,6 +10,7 @@ export type CreateUserPayload = {
   backgroundImage: string,
   bio: string,
   rules: string[],
+  city: string,
 }
 
 export class UsersRepository {
@@ -27,19 +28,20 @@ export class UsersRepository {
   }
 
 
-  async createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules }: CreateUserPayload) {
+  async createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city }: CreateUserPayload) {
     return this.db.user.create({
       data: {
-        email: email,
+        email,
         password_hash: bcrypt.hashSync(password),
-        firstName: firstName,
-        lastName: lastName,
+        firstName,
+        lastName,
         profile: {
           create: {
-            backgroundImage: backgroundImage,
-            profileImage: profileImage,
-            bio: bio,
-            rules: rules,
+            backgroundImage,
+            profileImage,
+            bio,
+            rules,
+            city
           }
         }
       }

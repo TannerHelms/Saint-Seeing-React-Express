@@ -46,6 +46,9 @@ const LoginScreen = (props) => {
             placeholder="Your password"
             required
             {...form.getInputProps("password")}
+            classNames={{
+              input: "rounded-lg",
+            }}
           />
           <IonButton className="w-full" type="submit">
             Login

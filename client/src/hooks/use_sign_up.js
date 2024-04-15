@@ -6,9 +6,14 @@ const useSignUp = () => {
     const signup = ({ data, backgroundImage, profileImage }) => {
         const fd = new FormData();
         for (const key in data) {
-            fd.append(key, data[key]);
+            if (key == "rules") {
+                data[key].forEach((rule, index) => {
+                    fd.append(key, rule);
+                });
+            } else {
+                fd.append(key, data[key]);
+            }
         }
-
         fd.append("background", backgroundImage, backgroundImage.name);
         fd.append("profile", profileImage, profileImage.name);
 
