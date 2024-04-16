@@ -36,15 +36,16 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
   // Create a user
   router.post("/", async (req, res) => {
     try {
-      console.log(req.body)
       const background = Array.isArray(req.files?.background) ? req.files.background[0] : req.files?.background;
       const profile = Array.isArray(req.files?.profile) ? req.files.profile[0] : req.files?.profile;
       const backgroundPath = `/assets/background/${Date.now()}-${background?.name}`;
       const profilePath = `/assets/avatar/${Date.now()}-${profile?.name}`;
       if (background) background.mv("." + backgroundPath);
       if (profile) profile.mv("." + profilePath);
+      const rules = typeof req.body.rules == "string" ? [req.body.rules] : req.body.rules;
       const user = await usersRepository.createUser({
         ...req.body,
+        rules,
         backgroundImage: process.env.SERVER_URL + backgroundPath,
         profileImage: process.env.SERVER_URL + profilePath,
       });

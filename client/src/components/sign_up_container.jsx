@@ -45,7 +45,7 @@ const SignUpContainer = (props) => {
   });
 
   useEffect(() => {
-    console.log(form.values);
+    // console.log(form.values);
   }, [form]);
 
   if (signup.isSuccess) {

@@ -25,8 +25,8 @@ async function main() {
           profileImage: faker.image.avatar(),
           city: "Logan, Utah",
           bio: faker.lorem.paragraph(),
-          longitude: 41.7370,
-          latitude: -111.8338,
+          longitude: -111.8338,
+          latitude: 41.7370,
         }
       }
     },

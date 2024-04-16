@@ -1,0 +1,6 @@
+# Ignore everything
+*
+
+# Allow .gitignore and .txt files
+!.gitignore
+!*.txt

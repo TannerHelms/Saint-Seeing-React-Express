@@ -11,6 +11,8 @@ export type CreateUserPayload = {
   bio: string,
   rules: string[],
   city: string,
+  longitude: string,
+  latitude: string,
 }
 
 export class UsersRepository {
@@ -28,7 +30,7 @@ export class UsersRepository {
   }
 
 
-  async createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city }: CreateUserPayload) {
+  async createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: CreateUserPayload) {
     return this.db.user.create({
       data: {
         email,
@@ -41,7 +43,9 @@ export class UsersRepository {
             profileImage,
             bio,
             rules,
-            city
+            city,
+            longitude: Number(longitude),
+            latitude: Number(latitude),
           }
         }
       }
