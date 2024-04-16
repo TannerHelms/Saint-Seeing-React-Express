@@ -73,6 +73,40 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
     res.json({ user });
   });
 
+  // Update a user 
+  router.put("/:id", authMiddleware, async (req, res) => {
+    try {
+      const background = Array.isArray(req.files?.background) ? req.files.background[0] : req.files?.background;
+      const profile = Array.isArray(req.files?.profile) ? req.files.profile[0] : req.files?.profile;
+      const backgroundPath = `/assets/background/${Date.now()}-${background?.name}`;
+      const profilePath = `/assets/avatar/${Date.now()}-${profile?.name}`;
+      if (background) background.mv("." + backgroundPath);
+      if (profile) profile.mv("." + profilePath);
+      const rules = typeof req.body.rules == "string" ? [req.body.rules] : req.body.rules;
+
+      let data = {
+        ...req.body,
+        rules,
+      }
+      if (background) {
+        data["backgroundImage"] = process.env.SERVER_URL + backgroundPath;
+      } else {
+        data["backgroundImage"] = req.body.background;
+      }
+      if (profile) {
+        data["profileImage"] = process.env.SERVER_URL + profilePath;
+      } else {
+        data["profileImage"] = req.body.profile;
+      }
+
+      const user = await usersRepository.updateUser(parseInt(req.params.id), data);
+      res.json({ user });
+    } catch (error) {
+      console.log(error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to update user" });
+    }
+  });
+
 
   return router;
 }

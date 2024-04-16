@@ -11,6 +11,9 @@ const UserForm = ({
   setBackgroundImage,
   setProfileImage,
   handleSubmit,
+  button,
+  backgroundImage,
+  profileImage,
 }) => {
   const handleAddRule = () => {
     const clone = structuredClone(form.values.rules);
@@ -29,6 +32,8 @@ const UserForm = ({
         <SignUpBanner
           background={setBackgroundImage}
           profile={setProfileImage}
+          backgroundImage={backgroundImage}
+          profileImage={profileImage}
         />
         {error && <p className="text-red-600">{error}</p>}
         <p className="text-center text-red-600">
@@ -89,7 +94,7 @@ const UserForm = ({
           </div>
         ))}
         <IonButton className="w-full" type="submit">
-          Sign Up
+          {button}
         </IonButton>
       </form>
     </>

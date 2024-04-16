@@ -1,19 +1,10 @@
-import { IonButton, IonIcon, IonTabButton } from "@ionic/react";
-import {
-  ActionIcon,
-  PasswordInput,
-  TextInput,
-  Textarea,
-  Title,
-} from "@mantine/core";
+import { IonTabButton } from "@ionic/react";
+import { Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { addCircleSharp } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import { z } from "zod";
 import useSignUp from "../hooks/use_sign_up";
-import AsyncCity from "./ui/async_city";
-import SignUpBanner from "./user/sign_up_banner";
 import UserForm from "./form/user_form";
 
 const schema = z.object({
@@ -84,6 +75,7 @@ const SignUpContainer = (props) => {
           setBackgroundImage={setBackgroundImage}
           setProfileImage={setProfileImage}
           handleSubmit={handleSubmit}
+          button={"Sign Up"}
         />
         <div className="flex gap-2 items-center">
           <p>Already have an account?</p>

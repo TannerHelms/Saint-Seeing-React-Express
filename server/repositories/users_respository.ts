@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
-export type CreateUserPayload = {
+export type UserPayload = {
   email: string,
   password: string,
   firstName: string,
@@ -30,7 +30,7 @@ export class UsersRepository {
   }
 
 
-  async createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: CreateUserPayload) {
+  createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
     return this.db.user.create({
       data: {
         email,
@@ -52,7 +52,7 @@ export class UsersRepository {
     });
   }
 
-  async getUserById(id: number) {
+  getUserById(id: number) {
     return this.db.user.findUnique({
       where: {
         id: id
@@ -63,10 +63,35 @@ export class UsersRepository {
     });
   }
 
-  async getUsers() {
+  getUsers() {
     return this.db.user.findMany({
       include: {
         profile: true,
+      }
+    });
+  }
+
+  updateUser(id: number, { email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
+    return this.db.user.update({
+      where: {
+        id
+      },
+      data: {
+        email,
+        password_hash: bcrypt.hashSync(password),
+        firstName,
+        lastName,
+        profile: {
+          create: {
+            backgroundImage,
+            profileImage,
+            bio,
+            rules,
+            city,
+            longitude: Number(longitude),
+            latitude: Number(latitude),
+          }
+        }
       }
     });
   }

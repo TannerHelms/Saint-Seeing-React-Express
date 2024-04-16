@@ -4,7 +4,7 @@ import RadarApi from "../../api/radarApi";
 
 const AsyncCity = ({ form }) => {
   const timeoutRef = useRef(-1);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(form.values.city || "");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 

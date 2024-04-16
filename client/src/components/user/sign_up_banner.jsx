@@ -1,11 +1,16 @@
 import { Space } from "@mantine/core";
 import { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
-const SignUpBanner = ({ background, profile }) => {
+const SignUpBanner = ({
+  background,
+  profile,
+  backgroundImage,
+  profileImage,
+}) => {
   const backgroundInput = useRef(null);
   const profileInput = useRef(null);
-  const [bg, setBg] = useState(null);
-  const [pro, setPro] = useState(null);
+  const [bg, setBg] = useState(backgroundImage || null);
+  const [pro, setPro] = useState(profileImage || null);
 
   const handleBackground = (e) => {
     background(e.target.files[0]);
