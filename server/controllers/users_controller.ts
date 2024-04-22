@@ -29,7 +29,7 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
         ...user,
         distance: haversine(p1, p2).toFixed(0)
       }
-    });
+    }).filter((user) => user.id != req.user!!.id);
     res.json({ users });
   });
 
