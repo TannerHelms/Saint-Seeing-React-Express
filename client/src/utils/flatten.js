@@ -1,4 +1,3 @@
-
 /**
  * Flatten a multidimensional object
  *
@@ -16,7 +15,11 @@ export const flattenObject = (obj) => {
         if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
             Object.assign(flattened, { ...flattenObject(value), ...flattened })
         } else {
-            flattened[key] = value
+            if (key.includes("Image") && !value.includes("http")) {
+                flattened[key] = import.meta.env.VITE_SERVER_URL + value;
+            } else {
+                flattened[key] = value
+            }
         }
     })
 

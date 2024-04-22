@@ -1,9 +1,9 @@
 import { useForm, zodResolver } from "@mantine/form";
-import { z } from "zod";
-import UserForm from "./form/user_form";
 import { useState } from "react";
+import { useHistory } from "react-router";
+import { z } from "zod";
 import useUsers from "../api/use_users";
-import SignUpBanner from "./user/sign_up_banner";
+import UserForm from "./form/user_form";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -15,6 +15,7 @@ const schema = z.object({
 });
 
 const EditProfileContainer = () => {
+  const navigate = useHistory();
   const { me, updateSelf } = useUsers();
   const [error, setError] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState(
@@ -35,12 +36,13 @@ const EditProfileContainer = () => {
   });
 
   const handleSubmit = async (e) => {
-    updateSelf.mutate({
+    await updateSelf.mutateAsync({
       id: me.data.id,
       ...e,
       background: backgroundImage,
       profile: profileImage,
     });
+    navigate.replace("/profile");
   };
 
   return (

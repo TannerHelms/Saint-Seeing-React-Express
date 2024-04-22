@@ -46,8 +46,8 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
       const user = await usersRepository.createUser({
         ...req.body,
         rules,
-        backgroundImage: process.env.SERVER_URL + backgroundPath,
-        profileImage: process.env.SERVER_URL + profilePath,
+        backgroundImage: backgroundPath,
+        profileImage: profilePath,
       });
       const token = jwt.sign({
         userId: user.id,
@@ -89,12 +89,12 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
         rules,
       }
       if (background) {
-        data["backgroundImage"] = process.env.SERVER_URL + backgroundPath;
+        data["backgroundImage"] = backgroundPath;
       } else {
         data["backgroundImage"] = req.body.background;
       }
       if (profile) {
-        data["profileImage"] = process.env.SERVER_URL + profilePath;
+        data["profileImage"] = profilePath;
       } else {
         data["profileImage"] = req.body.profile;
       }

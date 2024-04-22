@@ -40,7 +40,6 @@ const useUsers = (id) => {
     };
 
     const update = async (data) => {
-        console.log(data)
         const fd = new FormData();
         for (const key in data) {
             if (key == "backgroundImage" || key == "profileImage") {
@@ -68,7 +67,6 @@ const useUsers = (id) => {
                 fd.append(key, data[key]);
             }
         }
-        console.log(fd)
         return await api.put(`/users/${data.id}`, fd)
     };
 
