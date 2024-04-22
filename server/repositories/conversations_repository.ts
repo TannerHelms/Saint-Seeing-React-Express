@@ -76,7 +76,31 @@ export class ConversationsRepository {
     }
 
     getById = async (profile1Id: number, profile2Id: number) => {
-        const conversation = await this.db.conversation.findMany({
+
+        let conversation = await this.db.conversation.findMany({
+            where: {
+                profile1Id: profile1Id,
+                profile2Id: profile2Id
+            },
+            include: {
+                messages: {
+                    orderBy: {
+                        createdAt: 'asc'
+                    }
+                },
+                profile2: {
+                    include: {
+                        user: true
+                    }
+                }
+            }
+        })
+
+        if (conversation.length > 0) {
+            return conversation[0];
+        }
+
+        conversation = await this.db.conversation.findMany({
             where: {
                 OR: [
                     { profile1Id, profile2Id },
@@ -87,6 +111,11 @@ export class ConversationsRepository {
                 messages: {
                     orderBy: {
                         createdAt: 'asc'
+                    }
+                },
+                profile2: {
+                    include: {
+                        user: true
                     }
                 }
             }
