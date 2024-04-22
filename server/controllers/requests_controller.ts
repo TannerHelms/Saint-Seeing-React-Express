@@ -21,7 +21,7 @@ export const buildRequestsController = (repository: RequestsRepository) => {
     // Get a request between 2 users
     router.get("/:id", authMiddleware, async (req, res) => {
         try {
-            const request = await repository.getByUser(req.user!!.id, parseInt(req.params.id));
+            const request = await repository.getByUser(req.user!!.profileId, parseInt(req.params.id));
             res.json({ request });
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });

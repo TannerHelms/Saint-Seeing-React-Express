@@ -19,21 +19,23 @@ const UsersTile = ({ user }) => {
   if (request.isLoading) return null;
 
   const handleChatRequest = () => {
-    create.mutateAsync({ fromId: me.data.id, toId: user.id });
+    create.mutateAsync({ fromId: me.data.profileId, toId: user.id });
   };
 
   return (
     <div className="middle color-background h-body2">
       <div className="color-secondary">
         <Banner user={user} />
-        <div className="text-center mb-2">
-          {request.data?.toId == me.data.id && (
+        {request.data?.toId == me.data.profileId && (
+          <div className="text-center mb-2">
             <p>This user has sent you a chat request!</p>
-          )}
-          {request.data?.fromId == me.data.id && (
+          </div>
+        )}
+        {request.data?.fromId == me.data.profileId && (
+          <div className="text-center mb-2">
             <p>Your chat request is pending</p>
-          )}
-        </div>
+          </div>
+        )}
         <div className="text-center mb-2">
           {conversation.data && <p>You are currently friends!</p>}
         </div>

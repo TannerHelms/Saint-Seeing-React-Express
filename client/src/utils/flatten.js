@@ -1,3 +1,4 @@
+
 /**
  * Flatten a multidimensional object
  *
@@ -13,7 +14,7 @@ export const flattenObject = (obj) => {
         const value = obj[key]
 
         if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-            Object.assign(flattened, flattenObject(value))
+            Object.assign(flattened, { ...flattenObject(value), ...flattened })
         } else {
             flattened[key] = value
         }
