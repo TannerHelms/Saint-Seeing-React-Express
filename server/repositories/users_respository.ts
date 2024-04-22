@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import compressQueue from "../redis/config";
 
 export type UserPayload = {
   email: string,
@@ -30,7 +31,25 @@ export class UsersRepository {
   }
 
 
-  createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
+  async createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
+    if (profileImage) {
+      const job = await this.db.compressJob.create({
+        data: {
+          status: "pending",
+          photoUrl: profileImage,
+        }
+      });
+      compressQueue.add("compress", { jobId: job.id });
+    }
+    if (backgroundImage) {
+      const job = await this.db.compressJob.create({
+        data: {
+          status: "pending",
+          photoUrl: backgroundImage,
+        }
+      });
+      compressQueue.add("compress", { jobId: job.id });
+    }
     return this.db.user.create({
       data: {
         email,
@@ -71,7 +90,27 @@ export class UsersRepository {
     });
   }
 
-  updateUser(id: number, { email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
+  async updateUser(id: number, { email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
+    if (profileImage) {
+      const job = await this.db.compressJob.create({
+        data: {
+          status: "pending",
+          photoUrl: profileImage,
+        }
+      });
+      compressQueue.add("compress", { jobId: job.id, photoUrl: profileImage });
+    }
+
+    if (backgroundImage) {
+      const job = await this.db.compressJob.create({
+        data: {
+          status: "pending",
+          photoUrl: backgroundImage,
+        }
+      });
+      compressQueue.add("compress", { jobId: job.id, photoUrl: profileImage });
+    }
+
     return this.db.user.update({
       where: {
         id

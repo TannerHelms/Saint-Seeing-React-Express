@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.ts",
+    "pyworker": "python ./server/redis/worker.py",
     "prebuild": "rimraf ./dist",
     "build": "tsc && cd client && yarn build",
     "postbuild": "cp -r views ./dist/views",
@@ -38,6 +39,7 @@
     "@types/multer": "^1.4.11",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "bullmq": "^5.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.4",
     "express": "^4.18.2",

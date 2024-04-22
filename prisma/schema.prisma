@@ -92,3 +92,11 @@ model Message {
 
   conversation Conversation? @relation(fields: [profile1Id, profile2Id], references: [profile1Id, profile2Id])
 }
+
+model CompressJob {
+  id          Int      @id @default(autoincrement())
+  status      String   @default("pending")
+  photoUrl    String
+  createdAt   DateTime @default(now())
+  completedAt DateTime @updatedAt
+}
