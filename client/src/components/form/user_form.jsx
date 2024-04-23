@@ -15,6 +15,7 @@ const UserForm = ({
   backgroundImage,
   profileImage,
 }) => {
+  console.log(form.getInputProps("password"));
   const handleAddRule = () => {
     const clone = structuredClone(form.values.rules);
     clone.push("");
@@ -45,15 +46,17 @@ const UserForm = ({
           required
           {...form.getInputProps("email")}
         />
-        <PasswordInput
-          className="w-full br"
-          placeholder="Your password"
-          required
-          {...form.getInputProps("password")}
-          classNames={{
-            input: "rounded-lg",
-          }}
-        />
+        {form.getInputProps("password").value != undefined && (
+          <PasswordInput
+            className="w-full br"
+            placeholder="Your password"
+            required
+            {...form.getInputProps("password")}
+            classNames={{
+              input: "rounded-lg",
+            }}
+          />
+        )}
         <TextInput
           className="w-full br"
           placeholder="Your First Name"

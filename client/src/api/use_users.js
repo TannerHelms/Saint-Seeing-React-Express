@@ -100,9 +100,6 @@ const useUsers = (id) => {
         onError: (err, variables, context) => {
             queryClient.setQueryData(["me"], context.previous);
         },
-        onSettled: () => {
-            queryClient.invalidateQueries(["me"]);
-        },
     });
 
     return { me, user, users, updateSelf }

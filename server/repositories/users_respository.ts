@@ -92,8 +92,8 @@ export class UsersRepository {
     });
   }
 
-  async updateUser(id: number, { email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
-    if (profileImage) {
+  async updateUser(id: number, { email, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
+    if (profileImage && !profileImage.includes("http://")) {
       const job = await this.db.compressJob.create({
         data: {
           status: "pending",
@@ -103,7 +103,7 @@ export class UsersRepository {
       compressQueue.add("compress", { jobId: job.id, photoUrl: process.env.SERVER_URL + profileImage });
     }
 
-    if (backgroundImage) {
+    if (backgroundImage && !backgroundImage.includes("http://")) {
       const job = await this.db.compressJob.create({
         data: {
           status: "pending",
@@ -119,7 +119,6 @@ export class UsersRepository {
       },
       data: {
         email,
-        password_hash: bcrypt.hashSync(password),
         firstName,
         lastName,
         profile: {
