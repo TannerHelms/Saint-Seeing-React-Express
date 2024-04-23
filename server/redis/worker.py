@@ -1,6 +1,6 @@
 import asyncio
 from bullmq import Worker
-from prisma import Prisma
+# from prisma import Prisma
 from dotenv import load_dotenv
 from PIL import Image
 from io import BytesIO
@@ -11,8 +11,8 @@ load_dotenv()
 
 async def process(job, job_token):
     """Process a job that involves downloading, cropping, and uploading an image."""
-    db = Prisma()
-    await db.connect()
+    # db = Prisma()
+    # await db.connect()
 
     photo_url = job.data.get("photoUrl")
     if not photo_url:

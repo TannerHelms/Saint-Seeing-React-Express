@@ -35,6 +35,11 @@ services:
       - ${REDIS_COMMANDER_PORT}:8081
     environment:
       - REDIS_HOSTS=local:redis:6379
+  worker:
+    build:
+      context: ./server/redis
+      dockerfile: ./Dockerfile
+    container_name: ${APP_NAME}_worker
   # app:
   #   build:
   #     context: ./client/dist/
