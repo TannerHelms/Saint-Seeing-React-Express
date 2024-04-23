@@ -78,8 +78,8 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
     try {
       const background = Array.isArray(req.files?.background) ? req.files.background[0] : req.files?.background;
       const profile = Array.isArray(req.files?.profile) ? req.files.profile[0] : req.files?.profile;
-      const backgroundPath = `/assets/background/${Date.now()}-${background?.name}`;
-      const profilePath = `/assets/avatar/${Date.now()}-${profile?.name}`;
+      const backgroundPath = `/assets/background/${req.user!!.id}.${background?.mimetype.split("/")[1]}`;
+      const profilePath = `/assets/avatar/${req.user!!.id}.${profile?.mimetype.split("/")[1]}`;
       if (background) background.mv("." + backgroundPath);
       if (profile) profile.mv("." + profilePath);
       const rules = typeof req.body.rules == "string" ? [req.body.rules] : req.body.rules;

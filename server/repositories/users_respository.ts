@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import compressQueue from "../redis/config";
+import dotenv from "dotenv";
+dotenv.config();
 
 export type UserPayload = {
   email: string,
@@ -36,7 +38,7 @@ export class UsersRepository {
       const job = await this.db.compressJob.create({
         data: {
           status: "pending",
-          photoUrl: profileImage,
+          photoUrl: process.env.SERVER_URL + profileImage,
         }
       });
       compressQueue.add("compress", { jobId: job.id });
@@ -45,7 +47,7 @@ export class UsersRepository {
       const job = await this.db.compressJob.create({
         data: {
           status: "pending",
-          photoUrl: backgroundImage,
+          photoUrl: process.env.SERVER_URL + backgroundImage,
         }
       });
       compressQueue.add("compress", { jobId: job.id });
@@ -98,7 +100,7 @@ export class UsersRepository {
           photoUrl: profileImage,
         }
       });
-      compressQueue.add("compress", { jobId: job.id, photoUrl: profileImage });
+      compressQueue.add("compress", { jobId: job.id, photoUrl: process.env.SERVER_URL + profileImage });
     }
 
     if (backgroundImage) {
@@ -108,7 +110,7 @@ export class UsersRepository {
           photoUrl: backgroundImage,
         }
       });
-      compressQueue.add("compress", { jobId: job.id, photoUrl: profileImage });
+      compressQueue.add("compress", { jobId: job.id, photoUrl: process.env.SERVER_URL + backgroundImage });
     }
 
     return this.db.user.update({

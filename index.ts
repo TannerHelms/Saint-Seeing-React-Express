@@ -67,6 +67,19 @@ app.use("/requests", buildRequestsController(requestsRepository));
 app.use("/conversations", buildConversationsController(conversationsRepository));
 app.use("/messages", buildMessagesController(messagesRepository));
 
+app.post("/upload", (req, res) => {
+  const file = req.files?.file as fileUpload.UploadedFile;
+  const filePath = req.body.path;
+  file.mv(filePath, (err) => {
+    if (err) {
+      console.log(err)
+      res.status(500).send(err);
+    } else {
+      res.send({ path: filePath });
+    }
+  });
+});
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Listening on port ${process.env.PORT || 3000}...`);
