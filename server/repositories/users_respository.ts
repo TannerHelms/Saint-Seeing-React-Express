@@ -135,4 +135,15 @@ export class UsersRepository {
       }
     });
   }
+
+  updatePassword(id: number, password: string) {
+    return this.db.user.update({
+      where: {
+        id
+      },
+      data: {
+        password_hash: bcrypt.hashSync(password)
+      }
+    });
+  }
 }

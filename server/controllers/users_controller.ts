@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { authMiddleware } from "../middleware/authentication";
 import { UsersRepository } from "../repositories/users_respository";
 import haversine from "haversine";
+import bcrypt from "bcryptjs";
 
 // Define an interface for the user object
 interface User {
@@ -73,6 +74,16 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
     res.json({ user });
   });
 
+  router.put("/password", authMiddleware, async (req, res) => {
+    const { current, password } = req.body;
+    if (bcrypt.compareSync(current, req.user!!.password_hash)) {
+      await usersRepository.updatePassword(req.user!!.id, password);
+      res.status(200).send();
+    } else {
+      res.status(401).send();
+    }
+  });
+
   // Update a user 
   router.put("/:id", authMiddleware, async (req, res) => {
     try {
@@ -106,6 +117,7 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to update user" });
     }
   });
+
 
 
   return router;

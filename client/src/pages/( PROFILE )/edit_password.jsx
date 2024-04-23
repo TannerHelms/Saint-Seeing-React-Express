@@ -1,18 +1,16 @@
 import { Redirect } from "react-router";
 import useUsers from "../../api/use_users";
-import EditProfileContainer from "../../components/edit_profile_container";
+import PasswordForm from "../../components/form/password_form";
 import Header from "../../components/ui/header";
-import useNavbar from "../../hooks/use_navbar";
 
-const EditProfile = () => {
+const EditPassword = () => {
   const { me } = useUsers();
   if (me.isLoading) return null;
   if (!me.data) return <Redirect to="/login" />;
-
   return (
-    <Header title="Edit Profile" back={true} href={"/profile"}>
-      <EditProfileContainer />
+    <Header title="Edit Password" back={true} href={"/profile"}>
+      <PasswordForm />
     </Header>
   );
 };
-export default EditProfile;
+export default EditPassword;

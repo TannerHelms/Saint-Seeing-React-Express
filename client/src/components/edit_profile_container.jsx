@@ -5,7 +5,7 @@ import { z } from "zod";
 import useUsers from "../api/use_users";
 import UserForm from "./form/user_form";
 import { useDisclosure } from "@mantine/hooks";
-import { Box, LoadingOverlay } from "@mantine/core";
+import { Box, LoadingOverlay, Space } from "@mantine/core";
 import { useQueryClient } from "@tanstack/react-query";
 
 const schema = z.object({
@@ -58,6 +58,7 @@ const EditProfileContainer = () => {
         overlayProps={{ radius: "sm", blur: 2 }}
       />
       {/* ...other content */}
+      <Space h="lg" />
       <div className="w-full max m-auto">
         <UserForm
           form={form}
@@ -70,6 +71,7 @@ const EditProfileContainer = () => {
           profileImage={profileImage}
         />
       </div>
+      <Space h="lg" />
     </Box>
   );
 };

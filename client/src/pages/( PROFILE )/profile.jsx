@@ -30,9 +30,9 @@ const Profile = () => {
 
   return (
     <>
-      <Header title="Profile" icon={icon}>
-        <div className="relative col items-center pt-4 color-secondary height-media">
-          <div className="overflow-y-auto flex flex-col items-center w-full h-body">
+      <Header title="Profile" icon={icon} theme={"secondary"}>
+        <div className="color-secondary">
+          <div className="max m-auto pt-4">
             <ProfileContainer user={me.data} />
           </div>
         </div>

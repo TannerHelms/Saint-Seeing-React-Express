@@ -11,9 +11,9 @@ const Users = () => {
   if (!user.data) return <Redirect to="/login" />;
 
   return (
-    <Header title="User" back={true} href={"/home"}>
-      <div className="col items-center pt-4 color-secondary height-media">
-        <div className="overflow-y-auto flex flex-col items-center w-full h-body2 color-secondary">
+    <Header title="User" back={true} href={"/home"} theme={"secondary"}>
+      <div className="color-secondary">
+        <div className="max m-auto pt-4">
           <UsersTile user={user.data} />
         </div>
       </div>

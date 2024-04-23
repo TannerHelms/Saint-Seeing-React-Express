@@ -15,7 +15,6 @@ const UserForm = ({
   backgroundImage,
   profileImage,
 }) => {
-  console.log(form.getInputProps("password"));
   const handleAddRule = () => {
     const clone = structuredClone(form.values.rules);
     clone.push("");

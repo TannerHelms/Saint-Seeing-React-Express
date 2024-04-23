@@ -20,6 +20,7 @@ const Header = ({
   onClick,
   footer,
   href,
+  theme,
 }) => {
   return (
     <IonPage>
@@ -39,7 +40,16 @@ const Header = ({
           )}
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>{children}</IonContent>
+      {theme && (
+        <IonContent color={theme}>
+          <div className="text-black">{children}</div>
+        </IonContent>
+      )}
+      {!theme && (
+        <IonContent>
+          <div className="text-black">{children}</div>
+        </IonContent>
+      )}
       {footer && <IonFooter>{footer}</IonFooter>}
     </IonPage>
   );

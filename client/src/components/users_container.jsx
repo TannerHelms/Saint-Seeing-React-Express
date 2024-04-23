@@ -23,7 +23,7 @@ const UsersTile = ({ user }) => {
   };
 
   return (
-    <div className="middle color-background h-body2">
+    <div className="color-background">
       <div className="color-secondary">
         <Banner user={user} />
         {request.data?.toId == me.data.profileId && (
@@ -45,7 +45,7 @@ const UsersTile = ({ user }) => {
       <div className="color-secondary">
         <UserProfile user={user} />
         {!request.data && !conversation.data && (
-          <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <IonFab class="fixed bottom-2 right-2">
             <IonButton color={"tertiary"} onClick={handleChatRequest}>
               <IonIcon icon={chatbubbleOutline} size="large" />
             </IonButton>
