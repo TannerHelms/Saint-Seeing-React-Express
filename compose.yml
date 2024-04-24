@@ -21,7 +21,7 @@ services:
     image: postgres
     container_name: db
     ports:
-      - ${DB_PORT}:5179
+      - ${DB_PORT}:5432
     volumes:
       - db:/var/lib/postgresql/data
     environment:
