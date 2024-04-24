@@ -8,6 +8,7 @@
     "prebuild": "rimraf ./dist",
     "build": "tsc && cd client && yarn build",
     "postbuild": "cp -r views ./dist/views",
+    "generate": "prisma generate",
     "migrate-dev": "prisma migrate dev",
     "migrate-deploy": "prisma migrate deploy",
     "migrate-reset": "prisma migrate reset",

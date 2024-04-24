@@ -28,7 +28,7 @@ async def process(job, job_token):
     response.raise_for_status()  # Raise an exception if the request failed
 
     # Load the image into a Pillow object
-    image = Image.open(BytesIO(response.content))
+    image = Image.open(BytesIO(response.content)).convert('RGB')
 
     # Determine the shorter edge to create a square crop
     min_side = min(image.width, image.height)
@@ -65,9 +65,12 @@ async def process(job, job_token):
 
 
 async def main():
-    print('worker starting...')
+    print('work is starting...')
     # Feel free to remove the connection parameter, if your redis runs on localhost
-    worker = Worker("compress", process)
+    worker = Worker("compress", process, {"connection" : {
+        "host": "host.docker.internal",
+        "port": 6379,
+    }})
 
     # This while loop is just for the sake of this example
     # you won't need it in practice.

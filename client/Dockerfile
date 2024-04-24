@@ -8,10 +8,6 @@ RUN yarn install
 
 COPY ./ ./
 
-RUN yarn generate
-
-RUN yarn migrate-deploy
-
-EXPOSE 3000
+EXPOSE 8000
 
 CMD [ "yarn", "dev" ]
