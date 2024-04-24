@@ -55,7 +55,11 @@ export class ConversationsRepository {
                         id: conversation.profile2Id
                     },
                     include: {
-                        profile: true
+                        profile: {
+                            include: {
+                                user: true
+                            }
+                        }
                     }
                 })
             } else {
@@ -64,7 +68,11 @@ export class ConversationsRepository {
                         id: conversation.profile1Id
                     },
                     include: {
-                        profile: true
+                        profile: {
+                            include: {
+                                user: true
+                            }
+                        }
                     }
                 })
             }
@@ -95,6 +103,8 @@ export class ConversationsRepository {
                 }
             }
         })
+
+
 
         if (conversation.length > 0) {
             return conversation[0];

@@ -26,7 +26,6 @@ export const buildSessionsController = (db: PrismaClient) => {
         res.status(StatusCodes.NOT_FOUND).json({ error: "Invalid email or password" })
       }
     } catch (error) {
-      console.log(error)
       res.status(StatusCodes.BAD_REQUEST).json({ error: "Email or Password was missing" });
     }
   });
