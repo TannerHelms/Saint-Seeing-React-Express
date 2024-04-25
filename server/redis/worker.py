@@ -68,7 +68,7 @@ async def main():
     print('work is starting...')
     # Feel free to remove the connection parameter, if your redis runs on localhost
     worker = Worker("compress", process, {"connection" : {
-        "host": "host.docker.internal",
+        "host": "redis",
         "port": 6379,
     }})
 
