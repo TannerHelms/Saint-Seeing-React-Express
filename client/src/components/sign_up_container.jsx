@@ -35,10 +35,6 @@ const SignUpContainer = (props) => {
     validate: zodResolver(schema),
   });
 
-  useEffect(() => {
-    // console.log(form.values);
-  }, [form]);
-
   if (signup.isSuccess) {
     return <Redirect to="/login" />;
   }

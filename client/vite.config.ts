@@ -9,6 +9,6 @@ export default defineConfig({
     legacy()
   ],
   server: {
-    port: 8000,
+    port: 80,
   }
 })

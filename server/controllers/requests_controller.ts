@@ -32,9 +32,7 @@ export const buildRequestsController = (repository: RequestsRepository) => {
     // Get all the requests that a user has sent and received
     router.get("/", authMiddleware, async (req, res) => {
         try {
-            console.log(req.user!!.profileId)
             let { sent, received } = await repository.getByUserId(req.user!!.profileId);
-            console.log(received)
             sent = sent.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
             received = received.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
             res.json({ sent, received });
