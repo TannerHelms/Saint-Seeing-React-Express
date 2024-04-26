@@ -52,8 +52,8 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
       const { background, profile, backgroundPath, profilePath } = handleFiles(req);
       if (background && profile) {
         await usersRepository.updateUserPhotos(user.id,
-          backgroundPath,
           profilePath,
+          backgroundPath,
         );
       }
 
