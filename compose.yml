@@ -3,23 +3,9 @@ volumes:
   redis:
   assets:
 services:
-  api:
-      env_file:
-        - ./.env
-      build:
-        context: ./
-      ports: 
-        - ${PORT}:${PORT}
-      links:
-        - postgres
-        - redis
-      depends_on:
-        postgres:
-          condition: service_healthy
-      volumes:
-        - assets:/app/assets
   postgres:
     image: postgres
+    container_name: postgres
     ports:
       - ${DB_PORT}:5432
     volumes:
@@ -33,6 +19,37 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    tty: true
+  api:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    container_name: "api"
+    env_file:
+      - ./.env
+    build:
+      context: ./
+    ports: 
+      - ${PORT}:${PORT}
+    links:
+      - postgres
+      - redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./assets:/app/assets
+  migration:
+    build:
+      context: ./
+      dockerfile: ./prisma/Dockerfile
+    command: ./wait-for-it/wait-for-it.sh postgres:5432 -- npm run migrate-deploy && npm seed;
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    env_file:
+      - ./.env
+    
   redis:
     image: redis
     ports:
@@ -42,6 +59,7 @@ services:
     volumes:
       - redis:/data
   redis-commander:
+    container_name: commander
     image: rediscommander/redis-commander
     restart: always
     ports:
@@ -67,9 +85,9 @@ services:
       - redis
       - postgres
   client:
+    container_name: "client"
     build:
       context: ./client
-    container_name: "client"
     ports: 
       - ${CLIENT_PORT}:80
   

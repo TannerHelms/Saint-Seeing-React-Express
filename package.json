@@ -54,6 +54,6 @@
     "prisma-repl": "^1.4.0"
   },
   "prisma": {
-    "seed": "ts-node prisma/seeds.ts"
+    "seed": "ts-node ./prisma/seeds.ts"
   }
 }

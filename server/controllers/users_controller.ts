@@ -5,6 +5,7 @@ import { authMiddleware } from "../middleware/authentication";
 import { UsersRepository } from "../repositories/users_respository";
 import haversine from "haversine";
 import bcrypt from "bcryptjs";
+import fs from "fs";
 
 // Define an interface for the user object
 interface User {
@@ -87,6 +88,16 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
   // Update a user 
   router.put("/:id", authMiddleware, async (req, res) => {
     try {
+      // Check if assets/background directory exists, if not create it
+      const backgroundDir = "./assets/background";
+      if (!fs.existsSync(backgroundDir)) {
+        fs.mkdirSync(backgroundDir);
+      }
+      // Check if assets/avatar directory exists, if not create it
+      const avatarDir = "./assets/avatar";
+      if (!fs.existsSync(avatarDir)) {
+        fs.mkdirSync(avatarDir);
+      }
       const background = Array.isArray(req.files?.background) ? req.files.background[0] : req.files?.background;
       const profile = Array.isArray(req.files?.profile) ? req.files.profile[0] : req.files?.profile;
       const backgroundPath = `/assets/background/${req.user!!.id}.${background?.mimetype.split("/")[1]}`;
