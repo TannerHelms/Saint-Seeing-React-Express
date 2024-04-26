@@ -55,6 +55,7 @@ services:
       - ./.env
     
   redis:
+    container_name: redis
     image: redis
     ports:
       - ${REDIS_PORT}:6379
