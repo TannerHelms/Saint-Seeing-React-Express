@@ -33,25 +33,7 @@ export class UsersRepository {
   }
 
 
-  async createUser({ email, password, firstName, lastName, profileImage, backgroundImage, bio, rules, city, longitude, latitude }: UserPayload) {
-    if (profileImage) {
-      const job = await this.db.compressJob.create({
-        data: {
-          status: "pending",
-          photoUrl: process.env.SERVER_URL + profileImage,
-        }
-      });
-      compressQueue.add("compress", { jobId: job.id });
-    }
-    if (backgroundImage) {
-      const job = await this.db.compressJob.create({
-        data: {
-          status: "pending",
-          photoUrl: process.env.SERVER_URL + backgroundImage,
-        }
-      });
-      compressQueue.add("compress", { jobId: job.id });
-    }
+  async createUser({ email, password, firstName, lastName, bio, rules, city, longitude, latitude }: UserPayload) {
     return this.db.user.create({
       data: {
         email,
@@ -60,8 +42,6 @@ export class UsersRepository {
         lastName,
         profile: {
           create: {
-            backgroundImage,
-            profileImage,
             bio,
             rules,
             city,
@@ -88,6 +68,42 @@ export class UsersRepository {
     return this.db.user.findMany({
       include: {
         profile: true,
+      }
+    });
+  }
+
+  async updateUserPhotos(id: number, profileImage: string, backgroundImage: string) {
+    if (profileImage && !profileImage.includes("http://")) {
+      const job = await this.db.compressJob.create({
+        data: {
+          status: "pending",
+          photoUrl: profileImage,
+        }
+      });
+      compressQueue.add("compress", { jobId: job.id, photoUrl: process.env.SERVER_URL + profileImage });
+    }
+
+    if (backgroundImage && !backgroundImage.includes("http://")) {
+      const job = await this.db.compressJob.create({
+        data: {
+          status: "pending",
+          photoUrl: backgroundImage,
+        }
+      });
+      compressQueue.add("compress", { jobId: job.id, photoUrl: process.env.SERVER_URL + backgroundImage });
+    }
+
+    return this.db.user.update({
+      where: {
+        id
+      },
+      data: {
+        profile: {
+          update: {
+            profileImage,
+            backgroundImage
+          }
+        }
       }
     });
   }

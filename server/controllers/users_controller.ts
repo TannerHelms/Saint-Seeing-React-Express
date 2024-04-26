@@ -6,6 +6,7 @@ import { UsersRepository } from "../repositories/users_respository";
 import haversine from "haversine";
 import bcrypt from "bcryptjs";
 import fs from "fs";
+import handleFiles from "../utils/handle_files";
 
 // Define an interface for the user object
 interface User {
@@ -38,22 +39,23 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
   // Create a user
   router.post("/", async (req, res) => {
     try {
-      const background = Array.isArray(req.files?.background) ? req.files.background[0] : req.files?.background;
-      const profile = Array.isArray(req.files?.profile) ? req.files.profile[0] : req.files?.profile;
-      const backgroundPath = `/assets/background/${Date.now()}-${background?.name}`;
-      const profilePath = `/assets/avatar/${Date.now()}-${profile?.name}`;
-      if (background) background.mv("." + backgroundPath);
-      if (profile) profile.mv("." + profilePath);
       const rules = typeof req.body.rules == "string" ? [req.body.rules] : req.body.rules;
       const user = await usersRepository.createUser({
         ...req.body,
         rules,
-        backgroundImage: backgroundPath,
-        profileImage: profilePath,
       });
+      req.user = user;
       const token = jwt.sign({
         userId: user.id,
       }, process.env.ENCRYPTION_KEY as string);
+
+      const { background, profile, backgroundPath, profilePath } = handleFiles(req);
+      if (background && profile) {
+        await usersRepository.updateUserPhotos(user.id,
+          backgroundPath,
+          profilePath,
+        );
+      }
 
       res.json({ user, token });
     } catch (error) {
@@ -88,22 +90,7 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
   // Update a user 
   router.put("/:id", authMiddleware, async (req, res) => {
     try {
-      // Check if assets/background directory exists, if not create it
-      const backgroundDir = "./assets/background";
-      if (!fs.existsSync(backgroundDir)) {
-        fs.mkdirSync(backgroundDir);
-      }
-      // Check if assets/avatar directory exists, if not create it
-      const avatarDir = "./assets/avatar";
-      if (!fs.existsSync(avatarDir)) {
-        fs.mkdirSync(avatarDir);
-      }
-      const background = Array.isArray(req.files?.background) ? req.files.background[0] : req.files?.background;
-      const profile = Array.isArray(req.files?.profile) ? req.files.profile[0] : req.files?.profile;
-      const backgroundPath = `/assets/background/${req.user!!.id}.${background?.mimetype.split("/")[1]}`;
-      const profilePath = `/assets/avatar/${req.user!!.id}.${profile?.mimetype.split("/")[1]}`;
-      if (background) background.mv("." + backgroundPath);
-      if (profile) profile.mv("." + profilePath);
+      const { background, profile, backgroundPath, profilePath } = handleFiles(req);
       const rules = typeof req.body.rules == "string" ? [req.body.rules] : req.body.rules;
 
       let data = {

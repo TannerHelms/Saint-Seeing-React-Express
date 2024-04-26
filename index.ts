@@ -31,7 +31,7 @@ export const MANIFEST: Record<string, any> = DEBUG ? {} : JSON.parse(fs.readFile
 
 const cors = require('cors');
 const corsOptions = {
-  origin: 'http://77.37.67.62',
+  origin: process.env.CLIENT_URL,
   optionsSuccessStatus: 200,
 }
 const app = express();
@@ -47,21 +47,7 @@ app.use((req, res, next) => {
   next()
 });
 
-if (!DEBUG) {
-  app.use(express.static('static'));
-} else {
-  app.use((req, res, next) => {
-    if (req.url.includes("assets")) {
-      res.sendFile(path.join(__dirname, req.url).replace("%20", " "));
-    } else if (req.url.includes(".")) {
-      res.redirect(`${process.env.ASSET_URL}/${req.url}`)
-    } else {
-      next();
-    }
-
-  });
-}
-
+app.use(express.static('public'))
 
 app.use("/", buildHomeController());
 app.use("/users", buildUsersController(usersRepository));
@@ -73,7 +59,7 @@ app.use("/messages", buildMessagesController(messagesRepository));
 app.post("/upload", (req, res) => {
   const file = req.files?.file as fileUpload.UploadedFile;
   const filePath = req.body.path;
-  file.mv(filePath, (err) => {
+  file.mv("public/" + filePath, (err) => {
     if (err) {
       console.log(err)
       res.status(500).send(err);

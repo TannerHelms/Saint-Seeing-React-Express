@@ -36,9 +36,13 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_started
     volumes:
       - ./assets:/app/assets
   migration:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     build:
       context: ./
       dockerfile: ./prisma/Dockerfile
@@ -86,6 +90,8 @@ services:
     links:
       - redis
       - postgres
+    env_file:
+      - ./.env
   client:
     container_name: "client"
     build:

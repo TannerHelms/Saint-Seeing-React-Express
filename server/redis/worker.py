@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from PIL import Image
 from io import BytesIO
 import requests
+import os
 
 load_dotenv()
 
@@ -68,7 +69,7 @@ async def main():
     print('work is starting...')
     # Feel free to remove the connection parameter, if your redis runs on localhost
     worker = Worker("compress", process, {"connection" : {
-        "host": "host.docker.internal",
+        "host": os.getenv('ENVIRONMENT'),
         "port": 6379,
     }})
 
