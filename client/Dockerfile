@@ -10,4 +10,4 @@ COPY ./ ./
 
 EXPOSE 80
 
-CMD [ "yarn", "vite", "preview", "--host" ]
+CMD ./docker.sh
