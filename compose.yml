@@ -69,6 +69,8 @@ services:
     depends_on:
       - redis
   worker:
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
     build:
       context: ./server/redis
     depends_on:
