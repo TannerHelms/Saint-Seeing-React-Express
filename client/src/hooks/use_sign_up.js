@@ -28,7 +28,7 @@ const useSignUp = () => {
         fd.append("background", backgroundImage, backgroundImage.name);
         fd.append("profile", profileImage, profileImage.name);
 
-        return axios.post("http://localhost:3000/users", fd, {
+        return axios.post("http://77.37.67.62:3000/users", fd, {
             headers: {
                 'content-type': 'multipart/form-data'
             },
