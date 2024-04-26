@@ -8,20 +8,18 @@ services:
         - ./.env
       build:
         context: ./
-      container_name: api
       ports: 
         - ${PORT}:${PORT}
       links:
-        - db
+        - postgres
         - redis
       depends_on:
-        - db
-        - redis
+        postgres:
+          condition: service_healthy
       volumes:
         - assets:/app/assets
-  db:
+  postgres:
     image: postgres
-    container_name: db
     ports:
       - ${DB_PORT}:5432
     volumes:
@@ -37,7 +35,6 @@ services:
       retries: 5
   redis:
     image: redis
-    container_name: redis
     ports:
       - ${REDIS_PORT}:6379
     restart: always
@@ -46,7 +43,6 @@ services:
       - redis:/data
   redis-commander:
     image: rediscommander/redis-commander
-    container_name: commander
     restart: always
     ports:
       - 8081:8081
@@ -59,7 +55,7 @@ services:
       context: ./server/redis
     depends_on:
       - redis
-      - db
+      - postgres
     stdin_open: true
     tty: true
     volumes:
@@ -69,7 +65,7 @@ services:
       replicas: 2
     links:
       - redis
-      - db
+      - postgres
   client:
     build:
       context: ./client
