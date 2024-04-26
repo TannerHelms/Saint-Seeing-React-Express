@@ -10,4 +10,4 @@ COPY ./ ./
 
 EXPOSE 80
 
-CMD [ "yarn", "dev" ]
+CMD [ "yarn", "vite", "preview", "--host" ]
