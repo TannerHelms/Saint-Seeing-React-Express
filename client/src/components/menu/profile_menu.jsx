@@ -9,7 +9,14 @@ import {
   useIonRouter,
 } from "@ionic/react";
 
-import { exit, lockClosed, lockOpen, logOut, person } from "ionicons/icons";
+import {
+  exit,
+  lockClosed,
+  lockOpen,
+  logOut,
+  people,
+  person,
+} from "ionicons/icons";
 import useLogout from "../../hooks/use_logout";
 import MenuTile from "../ui/menu_tile";
 import { menuController } from "@ionic/core/components";
@@ -28,6 +35,11 @@ const ProfileMenu = () => {
       title: "Edit Password",
       path: "/profile/password",
       icon: <IonIcon icon={lockClosed} size="large" />,
+    },
+    {
+      title: "Friends",
+      path: "/profile/friends",
+      icon: <IonIcon icon={people} size="large" />,
     },
     {
       title: "Logout",

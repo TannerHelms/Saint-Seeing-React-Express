@@ -6,7 +6,7 @@ import timeAgo from "../utils/time_ago";
 const useRequests = (id) => {
     const api = useApi();
     const all = async () => {
-        let { sent, received } = await api.get("/requests");
+        let { sent, received, accepted } = await api.get("/requests");
 
         sent = sent.map((req) => {
             const flatten = flattenObject(req);
@@ -23,10 +23,18 @@ const useRequests = (id) => {
                 createdAt: timeAgo(new Date(req.createdAt)),
             };
         });
+        accepted = accepted.map((req) => {
+            const flatten = flattenObject(req);
+            return {
+                ...flatten,
+                createdAt: timeAgo(new Date(req.createdAt)),
+            };
+        });
 
         return {
             sent,
-            received
+            received,
+            accepted,
         }
     }
 
@@ -38,7 +46,7 @@ const useRequests = (id) => {
     const cancel = (id) => api.del(`/requests/${id}`)
 
 
-    const accept = (id) => api.del(`/requests/accept/${id}`)
+    const accept = (id) => api.put(`/requests/accept/${id}`)
 
     const create = ({ fromId, toId }) => api.post("/requests", { fromId, toId })
 

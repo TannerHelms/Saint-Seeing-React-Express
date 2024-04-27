@@ -6,7 +6,7 @@ import Header from "../../components/ui/header";
 const RequestsReceived = () => {
   const { requests } = useRequests();
 
-  if (requests.isLoading) return null;
+  if (requests.isLoading) return <p>loading</p>;
 
   if (!requests.data) return <Redirect to="/login" />;
 

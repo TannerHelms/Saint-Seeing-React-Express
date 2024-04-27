@@ -11,7 +11,7 @@ const RequestTile = ({ request, sent }) => {
   const handleRequest = async () => {
     if (sent === true) cancel.mutateAsync(request.id);
     if (sent === false) {
-      await accept.mutateAsync(request.id);
+      await accept.mutateAsync(request.fromId);
       create.mutateAsync({
         profile1Id: me.data.id,
         profile2Id: request.fromId,

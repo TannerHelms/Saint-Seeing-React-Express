@@ -26,13 +26,29 @@ export class RequestsRepository {
         })
     }
 
+    acceptRequest = (fromId: number, toId: number) => {
+        console.log(fromId, toId)
+        return this.db.request.update({
+            where: {
+                fromId_toId: {
+                    fromId,
+                    toId
+                }
+            },
+            data: {
+                accepted: true
+            }
+
+        })
+    }
+
     getByUser = async (fromId: number, toId: number) => {
         const from = await this.db.request.findUnique({
             where: {
                 fromId_toId: {
                     fromId,
                     toId
-                }
+                },
             }
         })
         const to = this.db.request.findUnique({
@@ -40,7 +56,7 @@ export class RequestsRepository {
                 fromId_toId: {
                     fromId: toId,
                     toId: fromId
-                }
+                },
             }
         })
         return from || to
@@ -61,12 +77,27 @@ export class RequestsRepository {
         const requests = await {
             sent: await this.db.request.findMany({
                 where: {
-                    fromId: userId
+                    fromId: userId,
+                    accepted: false
                 }
             }),
             received: await this.db.request.findMany({
                 where: {
-                    toId: userId
+                    toId: userId,
+                    accepted: false
+                }
+            }),
+            accepted: await this.db.request.findMany({
+                where: {
+                    OR: [
+                        {
+                            fromId: userId
+                        },
+                        {
+                            toId: userId
+                        }
+                    ],
+                    accepted: true
                 }
             })
         }
@@ -74,7 +105,7 @@ export class RequestsRepository {
         const sent = await Promise.all(requests.sent.map(async (request) => {
             const user = await this.db.user.findUnique({
                 where: {
-                    id: request.toId
+                    profileId: request.toId
                 },
                 include: {
                     profile: true
@@ -90,21 +121,34 @@ export class RequestsRepository {
         const received = await Promise.all(requests.received.map(async (request) => {
             const user = await this.db.user.findUnique({
                 where: {
-                    id: request.fromId
+                    profileId: request.fromId
                 },
                 include: {
                     profile: true
                 }
             })
-
             return {
                 ...request,
                 user
             }
         }))
 
-
-
-        return { sent, received }
+        const accepted = await Promise.all(requests.accepted.map(async (request) => {
+            const condition = request.fromId === userId ? request.toId : request.fromId
+            const user = await this.db.user.findUnique({
+                where: {
+                    profileId: condition
+                },
+                include: {
+                    profile: true
+                }
+            })
+            return {
+                ...request,
+                user
+            }
+        }))
+        return { sent, received, accepted }
     }
+
 }

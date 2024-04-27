@@ -21,7 +21,9 @@ export const buildRequestsController = (repository: RequestsRepository) => {
     // Get a request between 2 users
     router.get("/:id", authMiddleware, async (req, res) => {
         try {
+            console.log(req.params.id)
             const request = await repository.getByUser(req.user!!.profileId, parseInt(req.params.id));
+            console.log(request)
             res.json({ request });
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
@@ -32,10 +34,11 @@ export const buildRequestsController = (repository: RequestsRepository) => {
     // Get all the requests that a user has sent and received
     router.get("/", authMiddleware, async (req, res) => {
         try {
-            let { sent, received } = await repository.getByUserId(req.user!!.profileId);
+            let { sent, received, accepted } = await repository.getByUserId(req.user!!.profileId);
             sent = sent.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
             received = received.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-            res.json({ sent, received });
+            accepted = accepted.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+            res.json({ sent, received, accepted });
         }
         catch (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
@@ -54,12 +57,13 @@ export const buildRequestsController = (repository: RequestsRepository) => {
     });
 
     // accept a request
-    router.delete("/accept/:id", authMiddleware, async (req, res) => {
+    router.put("/accept/:id", authMiddleware, async (req, res) => {
         try {
             const id = req.params.id;
-            await repository.del(parseInt(id), req.user!!.id,);
-            res.json({ message: "Request has been cancelled" });
+            await repository.acceptRequest(parseInt(id), req.user!!.profileId);
+            res.status(StatusCodes.OK).send()
         } catch (error) {
+            console.log(error)
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
         }
     });

@@ -11,15 +11,14 @@ import { useParams } from "react-router";
 import useConversations from "../api/use_conversations";
 
 const UsersTile = ({ user }) => {
-  const id = useParams().id;
   const { me } = useUsers();
-  const { conversation } = useConversations(parseInt(id));
-  const { create, request } = useRequests(parseInt(id));
+  const { conversation } = useConversations(parseInt(user.profileId));
+  const { create, request } = useRequests(parseInt(user.profileId));
 
   if (request.isLoading) return null;
 
   const handleChatRequest = () => {
-    create.mutateAsync({ fromId: me.data.profileId, toId: user.id });
+    create.mutateAsync({ fromId: me.data.profileId, toId: user.profileId });
   };
 
   return (
