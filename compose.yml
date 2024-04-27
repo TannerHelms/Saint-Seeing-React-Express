@@ -39,7 +39,7 @@ services:
       redis:
         condition: service_started
     volumes:
-      - ./assets:/app/assets
+      - assets:/app/public/assets
   migration:
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -99,4 +99,17 @@ services:
       context: ./client
     ports: 
       - ${CLIENT_PORT}:4173
+  util:
+    image: node:lts
+    container_name: util
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+      - db:/var/lib/postgresql/data
+    entrypoint: 
+      - /bin/sh
+    env_file:
+      - ./.env
+      
   

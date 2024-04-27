@@ -1,9 +1,10 @@
 client
 node_modules
-docker
 .dockerignore
 .env.example
 .gitignore
 compose.yml
 README.md
 assets
+Dockerfile
+notes.txt

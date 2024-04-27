@@ -1,47 +1,51 @@
 import { createContext } from "react";
-import axios from "axios";
 import { store } from "../store/store";
-import { CapacitorHttp } from '@capacitor/core';
+
 
 export class Api {
   baseUrl = import.meta.env.VITE_SERVER_URL;
-  async makeRequest(uri, method, body) {
+  async makeRequest(url, method, body) {
     const token = store.getState().token.value;
-    const options = {
-      url: `${this.baseUrl}${uri}`,
-      method,
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     };
 
-    if (body) {
-      options.data = body;
+    // Check if the body is an instance of FormData. If not, set the Content-Type to application/json
+    if (!(body instanceof FormData)) {
+      // headers['Content-Type'] = 'application/json';
+      body = JSON.stringify(body);
     }
 
-    const res = await CapacitorHttp.request(options);
-    if (res.status === 200 && !res.error) {
-      return res.data;
-    } else {
-      throw new Error(res.data.error);
-    }
+    const options = {
+      method,
+      headers,
+      body: method !== 'GET' ? body : null,
+    };
+
+    if (method === 'GET') delete options.body; // Remove body for GET requests
+
+    const res = await fetch(`${this.baseUrl}${url}`, options);
+
+    const resp = await res.json();
+    if (resp.error) throw new Error(resp.error);
+    return resp;
   }
 
-  get(uri) {
-    return this.makeRequest(uri, "get");
+  get(url) {
+    return this.makeRequest(url, 'GET');
   }
 
-  post(uri, body) {
-    return this.makeRequest(uri, "post", body);
+  post(url, body = {}) {
+    return this.makeRequest(url, 'POST', body);
   }
 
-  put(uri, body) {
-    return this.makeRequest(uri, "put", body);
+  put(url, body = {}) {
+    return this.makeRequest(url, 'PUT', body);
   }
 
-  del(uri) {
-    return this.makeRequest(uri, "delete");
+  del(url) {
+    return this.makeRequest(url, 'DELETE');
   }
 }
 

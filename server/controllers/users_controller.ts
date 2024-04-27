@@ -115,9 +115,6 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to update user" });
     }
   });
-
-
-
   return router;
 }
 
