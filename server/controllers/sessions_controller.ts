@@ -13,7 +13,7 @@ export const buildSessionsController = (db: PrismaClient) => {
     try {
       const user = await db.user.findUnique({
         where: {
-          email: req.body.email
+          email: req.body.email.toLowerCase()
         }
       });
 

@@ -39,6 +39,7 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
   // Create a user
   router.post("/", async (req, res) => {
     try {
+      req.body.email = req.body.email.toLowerCase();
       const rules = typeof req.body.rules == "string" ? [req.body.rules] : req.body.rules;
       const user = await usersRepository.createUser({
         ...req.body,
@@ -90,6 +91,7 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
   // Update a user 
   router.put("/:id", authMiddleware, async (req, res) => {
     try {
+      req.body.email = req.body.email.toLowerCase();
       const { background, profile, backgroundPath, profilePath } = handleFiles(req);
       const rules = typeof req.body.rules == "string" ? [req.body.rules] : req.body.rules;
 
