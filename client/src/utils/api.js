@@ -8,12 +8,11 @@ export class Api {
     const token = store.getState().token.value;
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
     };
 
     // Check if the body is an instance of FormData. If not, set the Content-Type to application/json
     if (!(body instanceof FormData)) {
-      // headers['Content-Type'] = 'application/json';
+      headers['Content-Type'] = 'application/json';
       body = JSON.stringify(body);
     }
 
