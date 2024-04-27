@@ -21,9 +21,7 @@ export const buildRequestsController = (repository: RequestsRepository) => {
     // Get a request between 2 users
     router.get("/:id", authMiddleware, async (req, res) => {
         try {
-            console.log(req.params.id)
             const request = await repository.getByUser(req.user!!.profileId, parseInt(req.params.id));
-            console.log(request)
             res.json({ request });
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
@@ -63,8 +61,16 @@ export const buildRequestsController = (repository: RequestsRepository) => {
             await repository.acceptRequest(parseInt(id), req.user!!.profileId);
             res.status(StatusCodes.OK).send()
         } catch (error) {
-            console.log(error)
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
+        }
+    });
+
+    router.get("/count/:id", authMiddleware, async (req, res) => {
+        try {
+            const { accepted } = await repository.getByUserId(parseInt(req.params.id));
+            res.json({ count: accepted.length });
+        } catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).json({ error: "User not found" });
         }
     });
 

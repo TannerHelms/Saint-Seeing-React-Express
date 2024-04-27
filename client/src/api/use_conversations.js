@@ -77,7 +77,7 @@ const useConversations = (id) => {
         enabled: !!id,
     })
 
-    return { count: countQuery, conversation, conversations, create: createMutation }
+    return { conversation, conversations, create: createMutation }
 }
 
 export default useConversations;

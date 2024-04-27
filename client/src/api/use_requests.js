@@ -52,9 +52,17 @@ const useRequests = (id) => {
 
     const get = async () => (await api.get(`/requests/${id}`)).request
 
+    const ct = async () => (await api.get(`/requests/count/${id}`)).count
+
     const request = useQuery({
         queryKey: ["request", id],
         queryFn: get,
+        enabled: !!id
+    })
+
+    const count = useQuery({
+        queryKey: ["count", id],
+        queryFn: ct,
         enabled: !!id
     })
 
@@ -82,10 +90,9 @@ const useRequests = (id) => {
             requests.refetch()
             request.refetch()
         }
-
     })
 
-    return { requests, accept: acceptMutation, cancel: cancelMutation, create: createMutation, request };
+    return { requests, accept: acceptMutation, cancel: cancelMutation, create: createMutation, request, count };
 
 }
 

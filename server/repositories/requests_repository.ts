@@ -27,7 +27,6 @@ export class RequestsRepository {
     }
 
     acceptRequest = (fromId: number, toId: number) => {
-        console.log(fromId, toId)
         return this.db.request.update({
             where: {
                 fromId_toId: {

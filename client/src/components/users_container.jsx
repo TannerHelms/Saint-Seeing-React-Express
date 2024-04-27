@@ -14,7 +14,6 @@ const UsersTile = ({ user }) => {
   const { me } = useUsers();
   const { conversation } = useConversations(parseInt(user.profileId));
   const { create, request } = useRequests(parseInt(user.profileId));
-
   if (request.isLoading) return null;
 
   const handleChatRequest = () => {
@@ -25,19 +24,22 @@ const UsersTile = ({ user }) => {
     <div className="color-background">
       <div className="color-secondary">
         <Banner user={user} />
-        {request.data?.toId == me.data.profileId && (
+        {request.data?.toId == me.data.profileId && !request.data.accepted && (
           <div className="text-center mb-2">
             <p>This user has sent you a chat request!</p>
           </div>
         )}
-        {request.data?.fromId == me.data.profileId && (
+        {request.data?.fromId == me.data.profileId &&
+          !request.data.accepted && (
+            <div className="text-center mb-2">
+              <p>Your chat request is pending</p>
+            </div>
+          )}
+        {request.data?.accepted && (
           <div className="text-center mb-2">
-            <p>Your chat request is pending</p>
+            <p>You are currently friends!</p>
           </div>
         )}
-        <div className="text-center mb-2">
-          {conversation.data && <p>You are currently friends!</p>}
-        </div>
         <UserDetails user={user} friends={true} />
         <Space h="lg" />
       </div>

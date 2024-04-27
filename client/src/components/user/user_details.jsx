@@ -1,10 +1,17 @@
 import { IonIcon } from "@ionic/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { people } from "ionicons/icons";
 import useConversations from "../../api/use_conversations";
 import { useLocation, useParams } from "react-router";
+import useRequests from "../../api/use_requests";
+import { useQueryClient } from "@tanstack/react-query";
 const UserDetails = ({ user, friends = false }) => {
-  const { count } = useConversations(user.id);
+  const queryClient = useQueryClient();
+  const { count } = useRequests(parseInt(user.profileId));
+
+  useEffect(() => {
+    queryClient.invalidateQueries("count", user.profileId);
+  }, []);
 
   if (count.isLoading) return null;
 

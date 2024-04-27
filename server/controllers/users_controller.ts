@@ -60,7 +60,6 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
 
       res.json({ user, token });
     } catch (error) {
-      console.log(error)
       res.status(StatusCodes.BAD_REQUEST).json({ error: "Email already in use" });
     }
   });
@@ -113,7 +112,6 @@ export const buildUsersController = (usersRepository: UsersRepository): Router =
       const user = await usersRepository.updateUser(parseInt(req.params.id), data);
       res.json({ user });
     } catch (error) {
-      console.log(error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to update user" });
     }
   });
