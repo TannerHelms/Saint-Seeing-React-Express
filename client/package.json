@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port 80 --host",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint",
@@ -75,6 +75,7 @@
     "terser": "^5.4.0",
     "typescript": "^5.1.6",
     "vite": "^5.0.0",
+    "vite-plugin-mkcert": "^1.17.5",
     "vitest": "^0.34.6"
   },
   "description": "An Ionic project"

@@ -98,7 +98,7 @@ services:
     build:
       context: ./client
     ports: 
-      - ${CLIENT_PORT}:4173
+      - ${CLIENT_PORT}:80
   util:
     image: node:lts
     container_name: util

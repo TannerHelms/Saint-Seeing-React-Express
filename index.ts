@@ -16,6 +16,7 @@ import { MessagesRepository } from "./server/repositories/messages_repository";
 import { RequestsRepository } from "./server/repositories/requests_repository";
 import { UsersRepository } from "./server/repositories/users_respository";
 import fileUpload from "express-fileupload";
+import https from 'https';
 
 
 const db = new PrismaClient();
@@ -69,8 +70,13 @@ app.post("/upload", (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 3000, () => {
+const httpsServer = https.createServer(app);
+httpsServer.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT || 3000}...`);
 });
+
+// app.listen(process.env.PORT || 3000, () => {
+//   console.log(`Listening on port ${process.env.PORT || 3000}...`);
+// });
 
 
