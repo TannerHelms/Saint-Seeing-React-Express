@@ -16,7 +16,6 @@ import { MessagesRepository } from "./server/repositories/messages_repository";
 import { RequestsRepository } from "./server/repositories/requests_repository";
 import { UsersRepository } from "./server/repositories/users_respository";
 import fileUpload from "express-fileupload";
-import https from 'https';
 
 
 const db = new PrismaClient();
@@ -31,15 +30,12 @@ export const DEBUG = process.env.NODE_ENV !== "production";
 export const MANIFEST: Record<string, any> = DEBUG ? {} : JSON.parse(fs.readFileSync("static/.vite/manifest.json").toString())
 
 const cors = require('cors');
-const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  optionsSuccessStatus: 200,
-}
+
 const app = express();
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(fileUpload());
 
 app.use(bodyParser.json());
@@ -70,13 +66,13 @@ app.post("/upload", (req, res) => {
   });
 });
 
-const httpsServer = https.createServer(app);
-httpsServer.listen(process.env.PORT, () => {
-  console.log(`Listening on port ${process.env.PORT || 3000}...`);
-});
-
-// app.listen(process.env.PORT || 3000, () => {
+// const httpsServer = https.createServer(app);
+// httpsServer.listen(process.env.PORT, () => {
 //   console.log(`Listening on port ${process.env.PORT || 3000}...`);
 // });
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Listening on port ${process.env.PORT || 3000}...`);
+});
 
 
