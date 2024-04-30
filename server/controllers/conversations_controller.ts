@@ -44,6 +44,7 @@ export const buildConversationsController = (repository: ConversationsRepository
             const conversation = await repository.create(profile1Id, profile2Id);
             res.json({ conversation });
         } catch (error) {
+            console.log(error)
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Conversation has already been created" });
         }
     });

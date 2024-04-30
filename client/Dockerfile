@@ -10,6 +10,4 @@ COPY ./ ./
 
 EXPOSE 80
 
-RUN chmod +x ./docker.sh
-
-CMD ./docker.sh
+CMD ["yarn", "preview"]

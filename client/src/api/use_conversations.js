@@ -10,41 +10,21 @@ const useConversations = (id) => {
     const tk = useSelector(token);
 
     const all = async () => {
-        const { conversations } = await api.get("/conversations");
-        const convos = conversations.map((c) => {
-            const flatten = flattenObject(c);
-            const date = new Date(c.lastMessageAt)
-            return {
-                ...flatten,
-                lastMessageAt: timeAgo(date),
-            };
+        const conversations = (await api.get("/conversations")).conversations;
+        return conversations.map((convo) => {
+            convo.lastMessageAt = timeAgo(new Date(convo.lastMessageAt));
+            return flattenObject(convo);
         });
-
-        convos.forEach(c => {
-            const messages = c.messages.map(m => {
-                const date = new Date(m.createdAt);
-                return {
-                    ...m,
-                    createdAt: timeAgo(date),
-                };
-            });
-            queryClient.setQueryData(["conversation", c.id], {
-                ...c,
-                messages,
-            });
-        });
-
-        return convos;
     };
 
     const get = async () => {
         const { conversation } = await api.get(`/conversations/${id}`);
-        const flatten = flattenObject(conversation);
-        const date = new Date(conversation.lastMessageAt);
-        return {
-            ...flatten,
-            lastMessageAt: timeAgo(date),
-        };
+        conversation.lastMessageAt = timeAgo(new Date(conversation.lastMessageAt));
+        conversation.messages.map((message) => {
+            message.createdAt = timeAgo(new Date(message.createdAt));
+            return message;
+        });
+        return flattenObject(conversation);
     }
 
     const create = ({ profile1Id, profile2Id }) => api.post("/conversations", { profile1Id, profile2Id });

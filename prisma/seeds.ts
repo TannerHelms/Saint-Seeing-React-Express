@@ -63,8 +63,57 @@ async function main() {
   })
 
   await CreateUsers(prisma, 10);
-  await CreateConversations(prisma, 10);
+  // await CreateConversations(prisma, 10);
   await CreateRandomRequests(prisma, 10);
+
+  await prisma.request.upsert({
+    where: {
+      fromId_toId: {
+        fromId: 1,
+        toId: 2,
+      }
+    },
+    create: {
+      fromId: 1,
+      toId: 2,
+      accepted: true,
+    },
+    update: {
+      accepted: true,
+    }
+  })
+  await prisma.request.upsert({
+    where: {
+      fromId_toId: {
+        fromId: 1,
+        toId: 3,
+      }
+    },
+    create: {
+      fromId: 1,
+      toId: 3,
+      accepted: true,
+    },
+    update: {
+      accepted: true,
+    }
+  })
+  await prisma.request.upsert({
+    where: {
+      fromId_toId: {
+        fromId: 1,
+        toId: 4,
+      }
+    },
+    create: {
+      fromId: 1,
+      toId: 4,
+      accepted: true,
+    },
+    update: {
+      accepted: true,
+    }
+  })
 }
 
 main()

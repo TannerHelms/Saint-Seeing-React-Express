@@ -15,7 +15,9 @@ const MessageTile = ({ m, conversation, setLoad }) => {
       {/* Continer for time */}
       <p className="label">{m.createdAt}</p>
       {/* Container for message */}
-      <div className={`w-fit max-w-80 p-3 ${css} rounded-b`}>{m.body}</div>
+      <div className={`ml-auto w-fit max-w-80 p-3 ${css} rounded-b`}>
+        {m.body}
+      </div>
     </div>
   );
 };

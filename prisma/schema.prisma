@@ -51,8 +51,8 @@ model Request {
   from   Profile @relation("from", fields: [fromId], references: [id])
   to     Profile @relation("to", fields: [toId], references: [id])
 
-  accepted Boolean @default(false)
-
+  accepted  Boolean  @default(false)
+  chat      Boolean  @default(false)
   createdAt DateTime @default(now())
 
   @@id([fromId, toId])

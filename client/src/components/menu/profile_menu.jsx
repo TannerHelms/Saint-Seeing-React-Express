@@ -10,6 +10,8 @@ import {
 } from "@ionic/react";
 
 import {
+  chatbox,
+  chatboxEllipsesSharp,
   exit,
   lockClosed,
   lockOpen,
@@ -40,6 +42,16 @@ const ProfileMenu = () => {
       title: "Friends",
       path: "/profile/friends",
       icon: <IonIcon icon={people} size="large" />,
+    },
+    {
+      title: "Friend Requests",
+      path: "/requests_received",
+      icon: <IonIcon icon={chatbox} size="large" />,
+    },
+    {
+      title: "Pending Requests",
+      path: "/requests_sent",
+      icon: <IonIcon icon={chatboxEllipsesSharp} size="large" />,
     },
     {
       title: "Logout",

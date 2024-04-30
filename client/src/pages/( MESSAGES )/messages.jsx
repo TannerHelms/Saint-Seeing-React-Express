@@ -1,11 +1,8 @@
-import { IonButton, IonIcon } from "@ionic/react";
-import { menu } from "ionicons/icons";
 import Header from "../../components/ui/header";
 
-import { menuController } from "@ionic/core/components";
+import { Redirect } from "react-router";
 import useConversations from "../../api/use_conversations";
 import ConversationsTile from "../../components/conversations_container";
-import { Redirect } from "react-router";
 import useNavbar from "../../hooks/use_navbar";
 
 const Messages = () => {
@@ -16,19 +13,9 @@ const Messages = () => {
 
   if (!conversations.data) return <Redirect to="/login" />;
 
-  const handleShowMenu = () => {
-    menuController.open("chat-menu");
-  };
-
-  const icon = (
-    <IonButton onClick={handleShowMenu}>
-      <IonIcon icon={menu} size="large" />
-    </IonButton>
-  );
-
   return (
     <>
-      <Header title="Messages" back={false} icon={icon}>
+      <Header title="Messages" back={false}>
         <ConversationsTile conversations={conversations.data} />
       </Header>
     </>

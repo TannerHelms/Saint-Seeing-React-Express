@@ -17,7 +17,8 @@ export class ConversationsRepository {
     }
 
     create = async (profile1Id: number, profile2Id: number) => {
-        return await this.db.conversation.create({
+
+        const conversation = await this.db.conversation.create({
             data: {
                 profile1Id,
                 profile2Id,
@@ -25,6 +26,18 @@ export class ConversationsRepository {
                 lastMessageAt: new Date()
             }
         })
+        await this.db.request.update({
+            where: {
+                fromId_toId: {
+                    fromId: profile1Id,
+                    toId: profile2Id
+                }
+            },
+            data: {
+                chat: true
+            }
+        })
+        return conversation;
     }
 
     getByUserId = async (userId: number) => {
