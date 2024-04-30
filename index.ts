@@ -71,9 +71,13 @@ app.post("/upload", (req, res) => {
   });
 });
 
+const httpsServer = https.createServer({
+  key: fs.readFileSync(path.join(__dirname, './privkey.pem')),
+  cert: fs.readFileSync(path.join(__dirname, './fullchain.pem'))
+}, app);
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Listening on port ${process.env.PORT || 3000}...`);
+httpsServer.listen(3000, () => {
+  console.log('Listening on port 3000...')
 });
 
 
