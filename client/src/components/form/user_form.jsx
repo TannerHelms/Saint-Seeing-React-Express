@@ -3,6 +3,7 @@ import AsyncCity from "../ui/async_city";
 import { IonButton, IonIcon } from "@ionic/react";
 import { addCircleSharp } from "ionicons/icons";
 import SignUpBanner from "../user/sign_up_banner";
+import { useEffect } from "react";
 
 const UserForm = ({
   form,
@@ -14,6 +15,7 @@ const UserForm = ({
   button,
   backgroundImage,
   profileImage,
+  close,
 }) => {
   const handleAddRule = () => {
     const clone = structuredClone(form.values.rules);
@@ -26,6 +28,11 @@ const UserForm = ({
     clone[index] = v;
     form.setFieldValue("rules", clone);
   };
+  useEffect(() => {
+    if (error || submit.error) {
+      close();
+    }
+  }, [error, submit.error]);
   return (
     <>
       <form onSubmit={form.onSubmit(handleSubmit)} className="col w-full">
