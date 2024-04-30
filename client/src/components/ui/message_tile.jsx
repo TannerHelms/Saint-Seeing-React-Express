@@ -6,7 +6,7 @@ const MessageTile = ({ m, conversation, setLoad }) => {
   }, []);
   const sender = m.senderId != conversation.id;
   const css = sender
-    ? "bg-blue-700 text-white rounded-tl-lg"
+    ? "bg-blue-700 text-white rounded-tl-lg ml-auto"
     : "bg-white rounded-tr-lg";
   return (
     <div
@@ -15,9 +15,7 @@ const MessageTile = ({ m, conversation, setLoad }) => {
       {/* Continer for time */}
       <p className="label">{m.createdAt}</p>
       {/* Container for message */}
-      <div className={`ml-auto w-fit max-w-80 p-3 ${css} rounded-b`}>
-        {m.body}
-      </div>
+      <div className={`w-fit max-w-80 p-3 ${css} rounded-b`}>{m.body}</div>
     </div>
   );
 };
