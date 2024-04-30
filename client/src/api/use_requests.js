@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useApi from "../hooks/use_api";
 import { flattenObject } from "../utils/flatten";
 import timeAgo from "../utils/time_ago";
@@ -60,15 +60,7 @@ const useRequests = (id) => {
         enabled: !!id
     })
 
-    const count = useQuery({
-        queryKey: ["count", id],
-        queryFn: ct,
-        enabled: !!id
-    })
-
-
     const cancelMutation = useMutation({
-        queryKey: ["requests"],
         mutationFn: cancel,
         onSettled: () => {
             requests.refetch()
@@ -76,7 +68,6 @@ const useRequests = (id) => {
     })
 
     const acceptMutation = useMutation({
-        queryKey: ["requests"],
         mutationFn: accept,
         onSettled: () => {
             requests.refetch()
@@ -84,16 +75,13 @@ const useRequests = (id) => {
     })
 
     const createMutation = useMutation({
-        queryKey: ["requests"],
         mutationFn: create,
         onSettled: () => {
             requests.refetch()
             request.refetch()
         }
     })
-
-    return { requests, accept: acceptMutation, cancel: cancelMutation, create: createMutation, request, count };
-
+    return { requests, accept: acceptMutation, cancel: cancelMutation, create: createMutation, request };
 }
 
 export default useRequests;

@@ -17,7 +17,6 @@ export class ConversationsRepository {
     }
 
     create = async (profile1Id: number, profile2Id: number) => {
-
         const conversation = await this.db.conversation.create({
             data: {
                 profile1Id,
@@ -26,15 +25,22 @@ export class ConversationsRepository {
                 lastMessageAt: new Date()
             }
         })
-        await this.db.request.update({
+        const req = await this.db.request.updateMany({
             where: {
-                fromId_toId: {
-                    fromId: profile1Id,
-                    toId: profile2Id
-                }
+                OR: [
+                    {
+                        fromId: profile1Id,
+                        toId: profile2Id
+                    },
+                    {
+                        fromId: profile2Id,
+                        toId: profile1Id
+                    }
+                ]
             },
             data: {
-                chat: true
+                chat: true,
+                accepted: true
             }
         })
         return conversation;

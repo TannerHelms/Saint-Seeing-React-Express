@@ -44,12 +44,12 @@ const ProfileMenu = () => {
       icon: <IonIcon icon={people} size="large" />,
     },
     {
-      title: "Friend Requests",
+      title: "Received Requests",
       path: "/requests_received",
       icon: <IonIcon icon={chatbox} size="large" />,
     },
     {
-      title: "Pending Requests",
+      title: "Outgoing Requests",
       path: "/requests_sent",
       icon: <IonIcon icon={chatboxEllipsesSharp} size="large" />,
     },

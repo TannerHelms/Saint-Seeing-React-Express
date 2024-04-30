@@ -24,7 +24,7 @@ export class Api {
 
     if (method === 'GET') delete options.body; // Remove body for GET requests
 
-    const res = await fetch(`${this.baseUrl}${url}`, options);
+    const res = await fetch(this.baseUrl + url, options);
 
     const resp = await res.json();
     if (resp.error) throw new Error(resp.error);

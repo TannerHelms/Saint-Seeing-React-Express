@@ -59,7 +59,7 @@ export const buildRequestsController = (repository: RequestsRepository) => {
         try {
             const id = req.params.id;
             await repository.acceptRequest(parseInt(id), req.user!!.profileId);
-            res.status(StatusCodes.OK).send()
+            res.status(StatusCodes.OK).json({ success: true })
         } catch (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ error: "Request not found" });
         }

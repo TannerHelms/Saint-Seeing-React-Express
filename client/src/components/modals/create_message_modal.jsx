@@ -3,10 +3,10 @@ import useConversations from "../../api/use_conversations";
 import useRequests from "../../api/use_requests";
 import NewChatTile from "../ui/new_chat_tile";
 
-const CreateMessageModal = ({ opened, close }) => {
+const CreateMessageModal = ({ opened, close}) => {
   const { requests } = useRequests();
-  const { conversations } = useConversations();
-  if (requests.isLoading || conversations.isLoading) return null;
+
+  if (requests.isLoading) return null;
   return (
     <Modal opened={opened} onClose={close}>
       <div className="py-5 w-full">

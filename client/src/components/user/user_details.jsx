@@ -1,19 +1,25 @@
 import { IonIcon } from "@ionic/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { people } from "ionicons/icons";
-import useConversations from "../../api/use_conversations";
-import { useLocation, useParams } from "react-router";
-import useRequests from "../../api/use_requests";
 import { useQueryClient } from "@tanstack/react-query";
-const UserDetails = ({ user, friends = false }) => {
+import useApi from "../../hooks/use_api";
+const UserDetails = ({ user, friends = false, count = false }) => {
+  const api = useApi();
+  const [ct, setCt] = useState(null);
   const queryClient = useQueryClient();
-  const { count } = useRequests(parseInt(user.profileId));
-
   useEffect(() => {
-    queryClient.invalidateQueries("count", user.profileId);
+    if (count) {
+      const data = queryClient.getQueryData(["friends", user.id]);
+      if (data) {
+        setCt(data);
+      } else {
+        api.get("/requests/count/" + user.id).then((data) => {
+          queryClient.setQueryData(["friends", user.id], data.count);
+          setCt(data.count);
+        });
+      }
+    }
   }, []);
-
-  if (count.isLoading) return null;
 
   return (
     <div className="space-y-4">
@@ -25,7 +31,7 @@ const UserDetails = ({ user, friends = false }) => {
           {friends && (
             <>
               <IonIcon icon={people} size="large" />
-              <p>{count.data || "0"}</p>
+              {ct && <p>{ct}</p>}
             </>
           )}
         </div>

@@ -6,9 +6,39 @@ import { token } from "../store/token_slice";
 import { useSelector } from "react-redux";
 const useConversations = (id) => {
     const api = useApi();
-    const queryClient = useQueryClient();
     const tk = useSelector(token);
+    const allRequests = async () => {
+        let { sent, received, accepted } = await api.get("/requests");
 
+        sent = sent.map((req) => {
+            const flatten = flattenObject(req);
+            return {
+                ...flatten,
+                createdAt: timeAgo(new Date(req.createdAt)),
+            };
+        });
+
+        received = received.map((req) => {
+            const flatten = flattenObject(req);
+            return {
+                ...flatten,
+                createdAt: timeAgo(new Date(req.createdAt)),
+            };
+        });
+        accepted = accepted.map((req) => {
+            const flatten = flattenObject(req);
+            return {
+                ...flatten,
+                createdAt: timeAgo(new Date(req.createdAt)),
+            };
+        });
+
+        return {
+            sent,
+            received,
+            accepted,
+        }
+    }
     const all = async () => {
         const conversations = (await api.get("/conversations")).conversations;
         return conversations.map((convo) => {
@@ -29,13 +59,16 @@ const useConversations = (id) => {
 
     const create = ({ profile1Id, profile2Id }) => api.post("/conversations", { profile1Id, profile2Id });
 
-    const count = async () => (await api.get(`/conversations/count/${id}`)).count;
+    const requests = useQuery({
+        queryKey: ["requests"],
+        queryFn: allRequests,
+    });
 
     const createMutation = useMutation({
-        queryKey: ["conversations"],
         mutationFn: create,
         onSettled: () => {
-            queryClient.invalidateQueries("conversations");
+            conversations.refetch();
+            requests.refetch();
         },
     });
 
@@ -48,12 +81,6 @@ const useConversations = (id) => {
     const conversation = useQuery({
         queryKey: ["conversation", id],
         queryFn: get,
-        enabled: !!id,
-    })
-
-    const countQuery = useQuery({
-        queryKey: ["count", id],
-        queryFn: count,
         enabled: !!id,
     })
 
