@@ -16,7 +16,6 @@ import { MessagesRepository } from "./server/repositories/messages_repository";
 import { RequestsRepository } from "./server/repositories/requests_repository";
 import { UsersRepository } from "./server/repositories/users_respository";
 import fileUpload from "express-fileupload";
-import https from 'https';
 
 
 const db = new PrismaClient();
