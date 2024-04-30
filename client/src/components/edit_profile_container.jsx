@@ -18,7 +18,7 @@ const schema = z.object({
 
 const EditProfileContainer = () => {
   const queryClient = useQueryClient();
-  const [visible, { toggle }] = useDisclosure(false);
+  const [visible, { open, close, toggle }] = useDisclosure(false);
   const navigate = useHistory();
   const { me, updateSelf } = useUsers();
   const [error, setError] = useState(null);
@@ -39,7 +39,7 @@ const EditProfileContainer = () => {
   });
 
   const handleSubmit = async (e) => {
-    toggle();
+    open();
     await updateSelf.mutateAsync({
       id: me.data.id,
       ...e,
@@ -61,6 +61,7 @@ const EditProfileContainer = () => {
       <Space h="lg" />
       <div className="w-full max m-auto">
         <UserForm
+          submit={updateSelf}
           form={form}
           error={error}
           setBackgroundImage={setBackgroundImage}
@@ -69,6 +70,7 @@ const EditProfileContainer = () => {
           button={"Update Profile"}
           backgroundImage={backgroundImage}
           profileImage={profileImage}
+          close={close}
         />
       </div>
       <Space h="lg" />

@@ -1,10 +1,9 @@
+import { Loader } from "@mantine/core";
 import { Redirect } from "react-router";
 import useUsers from "../../api/use_users";
 import HomeTile from "../../components/home_container";
 import Header from "../../components/ui/header";
-import Spinner from "../../components/ui/spinner";
 import useNavbar from "../../hooks/use_navbar";
-import { Loader } from "@mantine/core";
 
 const Home = () => {
   useNavbar();
