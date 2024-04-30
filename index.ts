@@ -36,11 +36,16 @@ const corsOptions = {
   origin: ['http://localhost', "https://sharptechnology.us"],
   optionsSuccessStatus: 200
 }
+
 const app = express();
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
-app.use(cors(corsOptions));
+if (process.env.ENV === "production") {
+  app.use(cors(corsOptions));
+} else {
+  app.use(cors());
+}
 app.use(fileUpload());
 
 app.use(bodyParser.json());
