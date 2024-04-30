@@ -9,6 +9,7 @@ const Banner = ({ user }) => {
             src={user.backgroundImage}
             alt="profileImage"
             className="w-full h-full aspect-square object-cover"
+            loading="lazy"
           />
         </div>
         <Space h={"xl"} />
@@ -17,6 +18,8 @@ const Banner = ({ user }) => {
             src={user.profileImage}
             alt="profileImage"
             className="size-36 sm:size-40 rounded-full object-cover"
+            loading="lazy"
+            
           />
         </div>
       </div>

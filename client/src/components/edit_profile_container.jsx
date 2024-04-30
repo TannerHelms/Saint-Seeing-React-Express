@@ -46,7 +46,7 @@ const EditProfileContainer = () => {
       background: backgroundImage,
       profile: profileImage,
     });
-    queryClient.invalidateQueries("me");
+    queryClient.invalidateQueries({ queryKey: ["me"] });
     navigate.replace("/profile");
   };
 

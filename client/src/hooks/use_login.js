@@ -16,7 +16,7 @@ const useLogin = () => {
         mutationFn: login,
         onSettled: async ({ token }) => {
             await dispatch(setToken({ token }))
-            queryClient.invalidateQueries(["me"]);
+            queryClient.invalidateQueries({ queryKey: ["me"] });
         },
     });
 

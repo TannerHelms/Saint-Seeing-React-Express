@@ -36,7 +36,7 @@ const useMessage = (conversation) => {
             queryClient.setQueryData(["conversation", conversation.id], context.previousData)
         },
         onSettled: (data) => {
-            queryClient.invalidateQueries(["conversation", conversation.id]);
+            queryClient.invalidateQueries({ queryKey: ["conversation", conversation.id] });
         },
         enabled: !!conversation.id
     })
