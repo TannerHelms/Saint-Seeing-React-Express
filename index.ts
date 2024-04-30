@@ -33,7 +33,7 @@ export const MANIFEST: Record<string, any> = DEBUG ? {} : JSON.parse(fs.readFile
 const cors = require('cors');
 
 const corsOptions = {
-  origin: 'http://localhost',
+  origin: ['http://localhost', "https://sharptechnology.us"],
   optionsSuccessStatus: 200
 }
 const app = express();
