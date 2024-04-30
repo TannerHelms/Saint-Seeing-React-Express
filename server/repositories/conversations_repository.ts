@@ -123,18 +123,14 @@ export class ConversationsRepository {
             }
         })
 
-
-
         if (conversation.length > 0) {
             return conversation[0];
         }
 
-        conversation = await this.db.conversation.findMany({
+        const conversation2 = await this.db.conversation.findMany({
             where: {
-                OR: [
-                    { profile1Id, profile2Id },
-                    { profile1Id: profile2Id, profile2Id: profile1Id }
-                ]
+                profile1Id: profile2Id,
+                profile2Id: profile1Id,
             },
             include: {
                 messages: {
@@ -142,18 +138,18 @@ export class ConversationsRepository {
                         createdAt: 'asc'
                     }
                 },
-                profile2: {
+                profile1: {
                     include: {
-                        user: true
+                        user: true,
                     }
                 }
             }
         })
 
-        if (conversation.length == 0) {
+        if (conversation2.length == 0) {
             throw new Error("Conversation not found")
         }
 
-        return conversation[0];
+        return conversation2[0];
     }
 }
