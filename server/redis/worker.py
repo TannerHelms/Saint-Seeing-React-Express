@@ -2,7 +2,7 @@ import asyncio
 from bullmq import Worker
 # from prisma import Prisma
 from dotenv import load_dotenv
-from PIL import Image
+from PIL import Image, ImageOps
 from io import BytesIO
 import requests
 import os
@@ -30,7 +30,7 @@ async def process(job, job_token):
 
     # Load the image into a Pillow object
     image = Image.open(BytesIO(response.content)).convert('RGB')
-
+    image = ImageOps.exif_transpose(image)
     # Determine the shorter edge to create a square crop
     min_side = min(image.width, image.height)
 
